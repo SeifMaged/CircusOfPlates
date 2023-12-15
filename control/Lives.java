@@ -25,5 +25,5 @@ public class Lives extends Subject{
         for(Observer observer: observers){
             observer.getStatus();
         }
-    }
+    }   
 }
