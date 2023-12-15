@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 import model.Plate;
+import model.Shape;
 import model.ShapeColor;
 
 /**
@@ -87,10 +88,10 @@ public class Circus implements GameObjectContainer,World,Observer{
     int vanishingThreshold = 3; // Number of elements required for vanishing
     
     if (leftHand.size() >= vanishingThreshold) {
-        List<Plate> platesToRemove = new ArrayList<>();
+        List<Shape> platesToRemove = new ArrayList<>();
         
         for (int i = 0; i < vanishingThreshold; i++) {
-            platesToRemove.add((Plate) leftHand.pop());
+            platesToRemove.add((Shape) leftHand.pop());
         }
 
         boolean areColorsEqual = true;
@@ -104,8 +105,8 @@ public class Circus implements GameObjectContainer,World,Observer{
         }
 
         if (areColorsEqual) {
-            for (Plate plate : platesToRemove) {
-                controllable.remove(plate);
+            for (Shape shapes : platesToRemove) {
+                controllable.remove(shapes);
                 // reusePlates(plate);
             }
             vanish++;
@@ -119,10 +120,10 @@ public class Circus implements GameObjectContainer,World,Observer{
         int vanishingThreshold = 3; // Number of elements required for vanishing
 
         if (rightHand.size() >= vanishingThreshold) {
-            List<Plate> platesToRemove = new ArrayList<>();
+            List<Shape> platesToRemove = new ArrayList<>();
 
             for (int i = 0; i < vanishingThreshold; i++) {
-                platesToRemove.add((Plate) rightHand.pop());
+                platesToRemove.add((Shape) rightHand.pop());
             }
 
             boolean areColorsEqual = true;
@@ -136,8 +137,8 @@ public class Circus implements GameObjectContainer,World,Observer{
             }
 
             if (areColorsEqual) {
-                for (Plate plate : platesToRemove) {
-                    controllable.remove(plate);
+                for (Shape shapes : platesToRemove) {
+                    controllable.remove(shapes);
                     // reusePlates(plate);
                 }
                 vanish++;
