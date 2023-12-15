@@ -13,7 +13,7 @@ import javax.swing.JMenuItem;
 public class Menu extends JMenuBar implements ActionListener{
     private static final Menu instance = new Menu();
     
-    private GameEngine.GameController controller;
+    private static GameEngine.GameController controller;
     
     private final JMenu menu;
     private final JMenuItem pauseItem;
@@ -37,6 +37,10 @@ public class Menu extends JMenuBar implements ActionListener{
     public static Menu getInstance(){
         return instance;
     }
+    
+//    public static GameEngine.GameController getController(){
+//        return controller;
+//    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

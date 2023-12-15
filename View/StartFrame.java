@@ -21,7 +21,7 @@ public class StartFrame extends JFrame {
     private JButton startGame;
     private JButton exitGame;
     
-    private final String imageFile = "room10.jpg";
+    private final String imageFile = "src//Images//room10.jpg";
     private final int buttonWidth = 150;
     private final int buttonHeight = 50;
 
@@ -63,7 +63,8 @@ public class StartFrame extends JFrame {
         startGame.setForeground(new Color(153, 0, 0));
         
         startGame.addActionListener((ActionEvent e) -> {
-            // Strategy menu
+            LevelsFrame level = new LevelsFrame();
+            this.setVisible(false);
         });
 
         
