@@ -4,22 +4,20 @@
  */
 package control;
 
-import java.util.List;
-
 /**
  *
- * @author Adham
+ * @author adham
  */
-public class Score extends Subject{
-    private int score=0;
+public class Lives extends Subject{
+    private int lives=5;
     
-    public void increaseScore(int increment){
-        score +=increment;
+    public void decreaseLives(int decrement){
+        lives -=decrement;
         notifyAllSubscribers();
     }
     
-    public int getScore(){
-        return this.score;
+    public int getlives(){
+        return this.lives;
     }
 
     @Override
@@ -28,5 +26,4 @@ public class Score extends Subject{
             observer.getStatus();
         }
     }
-    
 }

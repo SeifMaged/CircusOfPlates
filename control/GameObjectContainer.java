@@ -14,9 +14,9 @@ import java.util.Stack;
  * @author adham
  */
 public interface GameObjectContainer {
-    List<GameObject> CONSTANT = new ArrayList<>();
-    List<GameObject> MOVABLE = new ArrayList<>();
-    List<GameObject> CONTROLLABLE = new ArrayList<>();
-    Stack<GameObject> L_HAND = new Stack<>();
-    Stack<GameObject> R_HAND = new Stack<>();
+    List<GameObject> constant = new ArrayList<>();
+    List<GameObject> movable = new ArrayList<>();
+    List<GameObject> controllable = new ArrayList<>();
+    Stack<GameObject> leftHand = new Stack<>();
+    Stack<GameObject> rightHand = new Stack<>();
 }

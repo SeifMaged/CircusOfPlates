@@ -9,5 +9,5 @@ package control;
  * @author Adham
  */
 public interface Observer {
-    void update(int score);
+    String getStatus();
 }
