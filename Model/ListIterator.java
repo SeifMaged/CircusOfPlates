@@ -6,7 +6,6 @@ package model;
 
 import eg.edu.alexu.csd.oop.game.GameObject;
 import java.util.List;
-import model.Iterator;
 
 /**
  *
@@ -28,9 +27,6 @@ public class ListIterator implements Iterator<GameObject> {
 
     @Override
     public GameObject next() {
-        if (!hasNext()) {
-            return null;
-        }
         GameObject value = list.get(index);
         index++;
         return value;

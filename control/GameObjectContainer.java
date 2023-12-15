@@ -6,7 +6,6 @@ package control;
 
 import eg.edu.alexu.csd.oop.game.GameObject;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
 /**
@@ -14,9 +13,9 @@ import java.util.Stack;
  * @author adham
  */
 public interface GameObjectContainer {
-    List<GameObject> constant = new ArrayList<>();
-    List<GameObject> movable = new ArrayList<>();
-    List<GameObject> controllable = new ArrayList<>();
+    ArrayList<GameObject> constant = new ArrayList<>();
+    ArrayList<GameObject> movable = new ArrayList<>();
+    ArrayList<GameObject> controllable = new ArrayList<>();
     Stack<GameObject> leftHand = new Stack<>();
     Stack<GameObject> rightHand = new Stack<>();
 }
