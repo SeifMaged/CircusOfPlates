@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.util.Stack;
-import model.Plate;
 import model.Shape;
 import model.ShapeColor;
 
@@ -27,26 +26,30 @@ public class RightAndLeftStack implements GameObjectContainer {
         checkIntersect(go, clown, leftHand, LEFT_HAND);
     }
 
-    private void checkIntersect(GameObject go, GameObject clown, Stack<GameObject> handStack, int handType) {
-        if (handStack.isEmpty()) {
-            if (intersectWithHand(go, clown, handType)) {
-                Plate pCaught = (Plate) go;
-                movable.remove(go);
-                pCaught.setX(clown.getX() + 130);
-                pCaught.setY(clown.getY() - pCaught.getHeight() / 2);
-                controllable.add(go);
-                handStack.push(go);
-            }
-        } else {
-            if (intersect(go, handStack.peek())) {
-                movable.remove(go);
-                Plate pCaught = (Plate) go;
-                pCaught.setX(clown.getX() + 130);
-                pCaught.setY(handStack.peek().getY() - pCaught.getHeight() / 2);
-                controllable.add(go);
-                handStack.push(go);
-            }
+    private boolean checkIntersect(GameObject go, GameObject clown, Stack<GameObject> handStack, int handType) {
+        int yIntersection = 0; // this initialization won't affect anything
+        boolean intersected = false;
+        
+        if (handStack.isEmpty() && intersectWithHand(go, clown, handType)) {
+            yIntersection = clown.getY();
+            intersected = true;
+
+        } else if (!handStack.isEmpty() && intersect(go, handStack.peek())) {
+            yIntersection = handStack.peek().getY();
+            intersected = true;
         }
+        
+        if(intersected)
+        {
+            Shape pCaught = (Shape) go;
+            movable.remove(go);
+            pCaught.setX(clown.getX() + 130);
+            pCaught.setY(yIntersection - pCaught.getHeight() / 2);
+            controllable.add(go);
+            handStack.push(go);
+        }
+        
+        return intersected;
     }
 
     private boolean intersectWithHand(GameObject o, GameObject clown, int handType) {
