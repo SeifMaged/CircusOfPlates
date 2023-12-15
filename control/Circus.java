@@ -7,7 +7,11 @@ package control;
 import Model.Strategy;
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.World;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
+import model.Plate;
+import model.ShapeColor;
 
 /**
  *
@@ -16,7 +20,9 @@ import java.util.List;
 public class Circus implements GameObjectContainer,World,Observer{
     private Score score = new Score();
     private Lives lives = new Lives();
+    
     private int vanish;
+  
     private final int screenWidth;
     private final int screenHeight;
     private Strategy strategy;
@@ -76,5 +82,77 @@ public class Circus implements GameObjectContainer,World,Observer{
         return this.getControlSpeed();
     }
 
+    
+    private void VanishLeftHand() {
+    int vanishingThreshold = 3; // Number of elements required for vanishing
+    
+    if (leftHand.size() >= vanishingThreshold) {
+        List<Plate> platesToRemove = new ArrayList<>();
+        
+        for (int i = 0; i < vanishingThreshold; i++) {
+            platesToRemove.add((Plate) leftHand.pop());
+        }
 
+        boolean areColorsEqual = true;
+        ShapeColor firstColor = platesToRemove.get(0).getColor();
+
+        for (int i = 1; i < platesToRemove.size(); i++) {
+            if (!platesToRemove.get(i).getColor().equals(firstColor)) {
+                areColorsEqual = false;
+                break;
+            }
+        }
+
+        if (areColorsEqual) {
+            for (Plate plate : platesToRemove) {
+                controllable.remove(plate);
+                // reusePlates(plate);
+            }
+            vanish++;
+        } else {
+           
+            leftHand.addAll(platesToRemove);
+        }
+    }
 }
+    private void VanishRightHand() {
+        int vanishingThreshold = 3; // Number of elements required for vanishing
+
+        if (rightHand.size() >= vanishingThreshold) {
+            List<Plate> platesToRemove = new ArrayList<>();
+
+            for (int i = 0; i < vanishingThreshold; i++) {
+                platesToRemove.add((Plate) rightHand.pop());
+            }
+
+            boolean areColorsEqual = true;
+            ShapeColor firstColor = platesToRemove.get(0).getColor();
+
+            for (int i = 1; i < platesToRemove.size(); i++) {
+                if (!platesToRemove.get(i).getColor().equals(firstColor)) {
+                    areColorsEqual = false;
+                    break;
+                }
+            }
+
+            if (areColorsEqual) {
+                for (Plate plate : platesToRemove) {
+                    controllable.remove(plate);
+                    // reusePlates(plate);
+                }
+                vanish++;
+            } else {
+                rightHand.addAll(platesToRemove);
+            }
+        }
+    }
+ 
+}
+
+    
+ 
+
+    
+    
+    
+          
