@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import eg.edu.alexu.csd.oop.game.GameObject;
 import java.util.Stack;

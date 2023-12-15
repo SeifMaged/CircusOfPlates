@@ -1,4 +1,4 @@
-package View;
+package view;
 
 import eg.edu.alexu.csd.oop.game.GameEngine;
 import java.awt.event.ActionEvent;
