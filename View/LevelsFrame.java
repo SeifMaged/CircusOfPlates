@@ -75,10 +75,7 @@ public class LevelsFrame extends JFrame {
 
         easy.addActionListener((ActionEvent e) -> {
             // Easy Implementaion
-            Easy easyLevel = new Easy();
-            Supplier<World> supplier = () -> new Circus(800, 600, easyLevel);
-            World game = supplier.get();
-            GameEngine.start("Circus Of Plates", game);
+            GameEngine.GameController g = GameEngine.start("test", new Circus(800,600,new Easy()));
         });
 
         this.add(easy);

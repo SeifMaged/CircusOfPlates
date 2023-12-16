@@ -8,11 +8,7 @@ import java.util.Stack;
 import model.Shape;
 import model.ShapeColor;
 
-<<<<<<< HEAD
 public class RightAndLeftStack {
-=======
-public class RightAndLeftStack{
->>>>>>> control
 
     private static final int MARGIN = 10;
     private static final int LEFT_HAND = 1;
@@ -20,16 +16,11 @@ public class RightAndLeftStack{
 
     private static int vanish;
 
-<<<<<<< HEAD
     public boolean checkIntersect(GameObject go, GameObject clown) {
 
         return checkIntersect(go, clown, GameObjectContainer.rightHand, RIGHT_HAND)
-            || checkIntersect(go, clown, GameObjectContainer.leftHand, LEFT_HAND);
-=======
-    public void checkIntersect(GameObject go, GameObject clown) {
-        checkIntersect(go, clown, GameObjectContainer.rightHand, RIGHT_HAND);
-        checkIntersect(go, clown, GameObjectContainer.leftHand, LEFT_HAND);
->>>>>>> control
+                || checkIntersect(go, clown, GameObjectContainer.leftHand, LEFT_HAND);
+
     }
 
     private boolean checkIntersect(GameObject go, GameObject clown, Stack<GameObject> handStack, int handType) {
@@ -109,19 +100,11 @@ public class RightAndLeftStack{
         }
     }
 
-<<<<<<< HEAD
     public void VanishLeftHand() {
         vanishHand(GameObjectContainer.leftHand);
     }
 
-    public void VanishRightHand() {
-=======
-    static void VanishLeftHand() {
-        vanishHand(GameObjectContainer.leftHand);
-    }
-
     static void VanishRightHand() {
->>>>>>> control
         vanishHand(GameObjectContainer.rightHand);
     }
 

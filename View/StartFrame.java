@@ -82,8 +82,4 @@ public class StartFrame extends JFrame {
 
         this.add(exitGame);
     }
-
-    public static void main(String[] args) {
-        new StartFrame();
-    }
 }
