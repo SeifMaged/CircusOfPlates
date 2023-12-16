@@ -7,6 +7,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import eg.edu.alexu.csd.oop.game.GameObject;
+import java.util.Random;
 
 public abstract class ImageObject implements GameObject{
 
@@ -27,7 +28,7 @@ public abstract class ImageObject implements GameObject{
             sourceImage = null;
         }
         image[0] = sourceImage;
-        
+        this.context = new Context(new MovingState(this));
 	}
 
     @Override
@@ -86,16 +87,17 @@ public abstract class ImageObject implements GameObject{
     	return "";
     }
     public void handleMoving(){
-        this.context.request(getXMoving(), getYmoving());
+        this.context.request(getNextPositionX(), getNextPositionY());
     }
     public void changeToControlState(){
         this.context.setState(new ControlState(this));
     }
-    public int getXMoving() {
-        return this.getX() + (Math.random() > 0.5 ? 1 : -1);
+    public int getNextPositionX() {
+        Random random = new Random();
+        return this.getX() + (random.nextInt(2) == 0 ? 1 : -1);
     }
     
-    public int getYmoving() {
+    public int getNextPositionY() {
         return this.getY() + 1;
     }
 	

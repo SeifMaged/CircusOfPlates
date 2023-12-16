@@ -1,37 +1,34 @@
 package model;
 
-import eg.edu.alexu.csd.oop.game.GameObject;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 
-public abstract class Shape extends ImageObject{
+public abstract class Shape extends ImageObject {
 
     private Color color;
     private ShapeColor shapeColor;
-    private Context context;
-    
+
     public Shape(int x, int y, ShapeColor shapeColor, String imagePath) {
-    	super(imagePath);
+        super(imagePath);
         setX(x);
         setY(y);
-        this.context = new Context(new MovingState(this));
         this.shapeColor = shapeColor;
         color = this.shapeColor.getColor();
         image[0] = applyColorToImage(sourceImage);
     }
 
     public ShapeColor getColor() {
-    	return shapeColor;
+        return shapeColor;
     }
 
     public void setColor(ShapeColor color) {
         this.shapeColor = color;
         this.color = shapeColor.getColor();
-        
+
         image[0] = applyColorToImage(sourceImage);
-        
+
     }
 
     /*
@@ -67,21 +64,4 @@ public abstract class Shape extends ImageObject{
 
         return null;
     }
-    public void handleMoving(){
-        this.context.request(getXMoving(), getYmoving());
-    }
-    public void changeToControlState(){
-        this.context.setState(new ControlState(this));
-    }
-    public int getXMoving() {
-        return this.getX() + (Math.random() > 0.5 ? 1 : -1);
-    }
-    
-    public int getYmoving() {
-        return this.getY() + 1;
-    }
-    
-
-
 }
-
