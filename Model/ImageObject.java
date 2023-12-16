@@ -14,6 +14,7 @@ public abstract class ImageObject implements GameObject{
     private int y;
     private String imagePath;
     private boolean isVisible;
+    private Context context;
     protected BufferedImage sourceImage;
     protected BufferedImage[] image = new BufferedImage[1];
 
@@ -83,6 +84,19 @@ public abstract class ImageObject implements GameObject{
     	if(imagePath != null)
     		return imagePath;
     	return "";
+    }
+    public void handleMoving(){
+        this.context.request(getXMoving(), getYmoving());
+    }
+    public void changeToControlState(){
+        this.context.setState(new ControlState(this));
+    }
+    public int getXMoving() {
+        return this.getX() + (Math.random() > 0.5 ? 1 : -1);
+    }
+    
+    public int getYmoving() {
+        return this.getY() + 1;
     }
 	
 

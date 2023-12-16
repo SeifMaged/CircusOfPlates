@@ -10,7 +10,9 @@ import eg.edu.alexu.csd.oop.game.World;
 import java.util.List;
 import model.Bomb;
 import model.Gift;
+import model.ImageObject;
 import model.ListIterator;
+import model.Shape;
 
 /**
  *
@@ -62,6 +64,7 @@ public class Circus implements GameObjectContainer,World,Observer{
     public boolean refresh() {
         Clown clown = (Clown) controllable.get(0);
         ListIterator list = new ListIterator(movable);
+        boolean flag = false;
         while (list.hasNext()) {
 
             GameObject go = list.next();
@@ -70,12 +73,45 @@ public class Circus implements GameObjectContainer,World,Observer{
             if (go.getY() == getHeight()) {
                 reusePlates(go);
             }
+            if(go instanceof Shape){
+                Shape caught = (Shape) go;
+                caught.handleMoving();
+                RightAndLeftStack.intersectWithHand(go, clown,1);
+                RightAndLeftStack.VanishLeftHand();
+                RightAndLeftStack.intersectWithHand(go, clown,2);
+                RightAndLeftStack.VanishRightHand();
+            }
+            if (go instanceof Bomb) {
+                Bomb caught = (Bomb) go;
+                caught.handleMoving();
+                if (!leftHand.isEmpty()) {
+                    decreaseLeft(go);
+                }
+                if (!rightHand.isEmpty()) {
+                    decreaseRight(go);
+                }
+            }
+
+            if (go instanceof Gift) {
+                Gift caught = (Gift) go;
+                caught.handleMoving();
+                if (!leftHand.isEmpty()) {
+                    increaseLeft(go);
+                }
+                if (go instanceof Gift && !rightHand.isEmpty()) {
+                    increaseRight(go);
+                }
+            }
 
             
         }
-        //to be implemented
-        return true;
+        
+        if (lives.getlives() == 0) {
+            flag = true;
+        }
+        return !flag;
     }
+    
     private boolean intersect(GameObject object1, GameObject object2) {
     double o1CenterX = object1.getX() + object1.getWidth() / 2;
     double o1CenterY = object1.getY() + object1.getHeight() / 2;
@@ -123,6 +159,22 @@ public class Circus implements GameObjectContainer,World,Observer{
     @Override
     public int getControlSpeed() {
         return this.getControlSpeed();
+    }
+
+    private void increaseRight(GameObject go) {
+        
+    }
+
+    private void increaseLeft(GameObject go) {
+        
+    }
+
+    private void decreaseRight(GameObject go) {
+        
+    }
+
+    private void decreaseLeft(GameObject go) {
+        
     }
 }
 

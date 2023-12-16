@@ -52,7 +52,7 @@ public class RightAndLeftStack implements GameObjectContainer {
         return intersected;
     }
 
-    private boolean intersectWithHand(GameObject o, GameObject clown, int handType) {
+    static boolean intersectWithHand(GameObject o, GameObject clown, int handType) {
         if (handType == RIGHT_HAND) {
             clown = controllable.get(0);
 
@@ -72,7 +72,7 @@ public class RightAndLeftStack implements GameObjectContainer {
                 && (Math.abs((o1.getY() + o1.getHeight() / 2) - (o2.getY() + o2.getHeight() / 2)) <= o1.getHeight());
     }
 
-    private void vanishHand(Stack<GameObject> handStack) {
+    static void vanishHand(Stack<GameObject> handStack) {
         int vanishingThreshold = 3; // Number of elements required for vanishing
 
         if (handStack.size() >= vanishingThreshold) {
@@ -104,11 +104,11 @@ public class RightAndLeftStack implements GameObjectContainer {
         }
     }
 
-    public void VanishLeftHand() {
+    static void VanishLeftHand() {
         vanishHand(leftHand);
     }
 
-    public void VanishRightHand() {
+    static void VanishRightHand() {
         vanishHand(rightHand);
     }
 
