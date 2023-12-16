@@ -11,7 +11,7 @@ import eg.edu.alexu.csd.oop.game.GameObject;
  * @author Adham
  */
 public class ControlState implements State{
-    GameObject obj=null;
+    private GameObject obj=null;
     
     public ControlState(GameObject obj){
         this.obj = obj;
