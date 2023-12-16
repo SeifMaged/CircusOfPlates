@@ -16,12 +16,12 @@ public class RightAndLeftStack{
 
     private static int vanish;
 
-    public void checkIntersect(GameObject go, GameObject clown) {
+    public static void checkIntersect(GameObject go, GameObject clown) {
         checkIntersect(go, clown, GameObjectContainer.rightHand, RIGHT_HAND);
         checkIntersect(go, clown, GameObjectContainer.leftHand, LEFT_HAND);
     }
 
-    private boolean checkIntersect(GameObject go, GameObject clown, Stack<GameObject> handStack, int handType) {
+    private static boolean checkIntersect(GameObject go, GameObject clown, Stack<GameObject> handStack, int handType) {
         int yIntersection = 0; // this initialization won't affect anything
         boolean intersected = false;
         
@@ -62,7 +62,7 @@ public class RightAndLeftStack{
         }
     }
 
-    private boolean intersect(GameObject o1, GameObject o2) {
+    private static boolean intersect(GameObject o1, GameObject o2) {
         return (Math.abs((o1.getX() + o1.getWidth() / 2) - (o2.getX() + o2.getWidth() / 2)) <= o1.getWidth())
                 && (Math.abs((o1.getY() + o1.getHeight() / 2) - (o2.getY() + o2.getHeight() / 2)) <= o1.getHeight());
     }

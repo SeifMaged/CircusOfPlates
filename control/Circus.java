@@ -7,6 +7,7 @@ import model.Strategy;
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.World;
 import java.util.List;
+import java.util.Stack;
 import model.Bomb;
 import model.Gift;
 import model.ListIterator;
@@ -20,7 +21,7 @@ import model.FallingObjectFactory;
 public class Circus implements World,Observer{
     private Score score = new Score();
     private Lives lives = new Lives();
-  
+    
     private final int screenWidth;
     private final int screenHeight;
     private Strategy strategy;
@@ -31,7 +32,9 @@ public class Circus implements World,Observer{
         this.screenHeight = height;
         this.strategy = strategy;
         GameObjectContainer.controllable.add(Clown.getInstance((int) (screenWidth * 0.4), (int) (screenHeight * 0.64), "src/resources/clown.png"));
-        Factory();  
+        Factory();
+        this.score.subscribe(this);
+        this.lives.subscribe(this);
     }
 
     @Override
@@ -76,12 +79,12 @@ public class Circus implements World,Observer{
             if(go instanceof Shape){
                 Shape caught = (Shape) go;
                 caught.handleMoving();
-                RightAndLeftStack.intersectWithHand(go, clown,1);
+                RightAndLeftStack.checkIntersect(go,clown);
                 RightAndLeftStack.VanishLeftHand();
-                RightAndLeftStack.intersectWithHand(go, clown,2);
                 RightAndLeftStack.VanishRightHand();
             }
             if (go instanceof Bomb) {
+               
                 Bomb caught = (Bomb) go;
                 caught.handleMoving();
                 if (!GameObjectContainer.leftHand.isEmpty()) {
@@ -93,6 +96,7 @@ public class Circus implements World,Observer{
             }
 
             if (go instanceof Gift) {
+                
                 Gift caught = (Gift) go;
                 caught.handleMoving();
                 if (!GameObjectContainer.leftHand.isEmpty()) {
@@ -124,7 +128,7 @@ public class Circus implements World,Observer{
 
     double maxHorizontalDistance = object1.getWidth() / 2;
     double maxVerticalDistance = object1.getHeight() / 2;
-
+        System.out.println(horizontalDistance <= maxHorizontalDistance && verticalDistance <= maxVerticalDistance);
     return horizontalDistance <= maxHorizontalDistance && verticalDistance <= maxVerticalDistance;
     }
 
