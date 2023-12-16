@@ -23,13 +23,14 @@ public abstract class ImageObject implements GameObject{
     
 	public ImageObject(String imagePath) {
 		this.imagePath = imagePath;
+		setVisible(true);
         try {
         	sourceImage = ImageIO.read(new File(this.imagePath));
         } catch (IOException e) {
             sourceImage = null;
         }
         image[0] = sourceImage;
-        
+        this.context = new Context(new MovingState(this));
 	}
 
     @Override

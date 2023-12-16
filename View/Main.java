@@ -32,13 +32,23 @@ public class Main {
        menu.add(resumeItem);
        menubar.add(menu);
        
-       controller = GameEngine.start("test", new Circus(800,600,new Easy()), menubar, Color.BLACK);
+       controller = GameEngine.start("test", new Circus(800,600,new Easy()), menubar, Color.WHITE);
         
         pauseItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == pauseItem) {
                     controller.pause();
+                }
+            }
+        }
+        );
+        
+        resumeItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == pauseItem) {
+                    controller.resume();
                 }
             }
         }

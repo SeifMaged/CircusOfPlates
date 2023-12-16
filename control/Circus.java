@@ -30,7 +30,8 @@ public class Circus implements World,Observer{
         this.screenWidth = width;
         this.screenHeight = height;
         this.strategy = strategy;
-        GameObjectContainer.controllable.add(Clown.getInstance((int) (screenWidth * 0.4), (int) (screenHeight * 0.64), "/clown.png"));
+        GameObjectContainer.controllable.add(Clown.getInstance((int) (screenWidth * 0.4), (int) (screenHeight * 0.64), "clown.png"));
+        Clown.getInstance((int) (screenWidth * 0.4), (int) (screenHeight * 0.64), "clown.png");
         Factory();  
     }
 
