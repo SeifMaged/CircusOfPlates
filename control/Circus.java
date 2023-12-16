@@ -158,7 +158,7 @@ public class Circus implements World,Observer{
 
     @Override
     public int getControlSpeed() {
-        return this.getControlSpeed();
+        return this.strategy.getControlSpeed();
     }
 
     private void increaseRight(GameObject go) {
