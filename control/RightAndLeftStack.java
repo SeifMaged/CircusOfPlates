@@ -1,10 +1,5 @@
 package control;
 
-import static control.GameObjectContainer.controllable;
-import static control.GameObjectContainer.leftHand;
-import static control.GameObjectContainer.movable;
-import static control.GameObjectContainer.rightHand;
-
 import eg.edu.alexu.csd.oop.game.GameObject;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +8,7 @@ import java.util.Stack;
 import model.Shape;
 import model.ShapeColor;
 
-public class RightAndLeftStack implements GameObjectContainer {
+public class RightAndLeftStack{
 
     private static final int MARGIN = 10;
     private static final int LEFT_HAND = 1;
@@ -22,8 +17,8 @@ public class RightAndLeftStack implements GameObjectContainer {
     private static int vanish;
 
     public void checkIntersect(GameObject go, GameObject clown) {
-        checkIntersect(go, clown, rightHand, RIGHT_HAND);
-        checkIntersect(go, clown, leftHand, LEFT_HAND);
+        checkIntersect(go, clown, GameObjectContainer.rightHand, RIGHT_HAND);
+        checkIntersect(go, clown, GameObjectContainer.leftHand, LEFT_HAND);
     }
 
     private boolean checkIntersect(GameObject go, GameObject clown, Stack<GameObject> handStack, int handType) {
@@ -42,10 +37,10 @@ public class RightAndLeftStack implements GameObjectContainer {
         if(intersected)
         {
             Shape pCaught = (Shape) go;
-            movable.remove(go);
+            GameObjectContainer.movable.remove(go);
             pCaught.setX(clown.getX() + 130);
             pCaught.setY(yIntersection - pCaught.getHeight() / 2);
-            controllable.add(go);
+            GameObjectContainer.controllable.add(go);
             handStack.push(go);
         }
         
@@ -54,16 +49,16 @@ public class RightAndLeftStack implements GameObjectContainer {
 
     static boolean intersectWithHand(GameObject o, GameObject clown, int handType) {
         if (handType == RIGHT_HAND) {
-            clown = controllable.get(0);
+            clown = GameObjectContainer.controllable.get(0);
 
             return (Math.abs(clown.getX() + clown.getWidth() - (o.getX() + o.getWidth())) <= o.getWidth() - MARGIN
-                    && o.getY() == controllable.get(0).getY() - MARGIN);
+                    && o.getY() == GameObjectContainer.controllable.get(0).getY() - MARGIN);
         } else {
 
-            clown = controllable.get(0);
+            clown = GameObjectContainer.controllable.get(0);
 
             return (Math.abs(clown.getX() - o.getX()) <= o.getWidth() - MARGIN
-                    && o.getY() == controllable.get(0).getY() - MARGIN);
+                    && o.getY() == GameObjectContainer.controllable.get(0).getY() - MARGIN);
         }
     }
 
@@ -94,7 +89,7 @@ public class RightAndLeftStack implements GameObjectContainer {
 
             if (areColorsEqual) {
                 for (Shape shapes : platesToRemove) {
-                    controllable.remove(shapes);
+                    GameObjectContainer.controllable.remove(shapes);
                     // reusePlates(plate);
                 }
                 vanish++;
@@ -105,11 +100,11 @@ public class RightAndLeftStack implements GameObjectContainer {
     }
 
     static void VanishLeftHand() {
-        vanishHand(leftHand);
+        vanishHand(GameObjectContainer.leftHand);
     }
 
     static void VanishRightHand() {
-        vanishHand(rightHand);
+        vanishHand(GameObjectContainer.rightHand);
     }
 
     public static int getVanish() {

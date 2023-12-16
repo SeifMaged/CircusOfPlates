@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package control;
 
 import model.Strategy;
@@ -18,7 +14,7 @@ import model.Shape;
  *
  * @author Adham
  */
-public class Circus implements GameObjectContainer,World,Observer{
+public class Circus implements World,Observer{
     private Score score = new Score();
     private Lives lives = new Lives();
   
@@ -31,22 +27,22 @@ public class Circus implements GameObjectContainer,World,Observer{
         this.screenWidth = width;
         this.screenHeight = height;
         this.strategy = strategy;
-        controllable.add(Clown.getInstance((int) (screenWidth * 0.4), (int) (screenHeight * 0.64), "/clown.png"));
+        GameObjectContainer.controllable.add(Clown.getInstance((int) (screenWidth * 0.4), (int) (screenHeight * 0.64), "/clown.png"));
     }
 
     @Override
     public List<GameObject> getConstantObjects() {
-        return this.constant;
+        return GameObjectContainer.constant;
     }
 
     @Override
     public List<GameObject> getMovableObjects() {
-        return this.movable;
+        return GameObjectContainer.movable;
     }
 
     @Override
     public List<GameObject> getControlableObjects() {
-        return this.controllable;
+        return GameObjectContainer.controllable;
     }
 
     @Override
@@ -62,8 +58,8 @@ public class Circus implements GameObjectContainer,World,Observer{
 // will be implmented.
     @Override
     public boolean refresh() {
-        Clown clown = (Clown) controllable.get(0);
-        ListIterator list = new ListIterator(movable);
+        Clown clown = (Clown) GameObjectContainer.controllable.get(0);
+        ListIterator list = new ListIterator(GameObjectContainer.movable);
         boolean flag = false;
         while (list.hasNext()) {
 
@@ -84,10 +80,10 @@ public class Circus implements GameObjectContainer,World,Observer{
             if (go instanceof Bomb) {
                 Bomb caught = (Bomb) go;
                 caught.handleMoving();
-                if (!leftHand.isEmpty()) {
+                if (!GameObjectContainer.leftHand.isEmpty()) {
                     decreaseLeft(go);
                 }
-                if (!rightHand.isEmpty()) {
+                if (!GameObjectContainer.rightHand.isEmpty()) {
                     decreaseRight(go);
                 }
             }
@@ -95,10 +91,10 @@ public class Circus implements GameObjectContainer,World,Observer{
             if (go instanceof Gift) {
                 Gift caught = (Gift) go;
                 caught.handleMoving();
-                if (!leftHand.isEmpty()) {
+                if (!GameObjectContainer.leftHand.isEmpty()) {
                     increaseLeft(go);
                 }
-                if (go instanceof Gift && !rightHand.isEmpty()) {
+                if (go instanceof Gift && !GameObjectContainer.rightHand.isEmpty()) {
                     increaseRight(go);
                 }
             }
@@ -136,7 +132,7 @@ public class Circus implements GameObjectContainer,World,Observer{
     }
     
     public void intersectedWithMoving(GameObject x) {
-        ListIterator l = new ListIterator(movable);
+        ListIterator l = new ListIterator(GameObjectContainer.movable);
         while (l.hasNext()) {
             GameObject gameObject = l.next();
             if (x != gameObject && intersect(x, gameObject) && x.getY() == 0 && !(x instanceof Bomb) && !(x instanceof Gift)) {
