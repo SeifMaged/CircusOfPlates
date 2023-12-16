@@ -1,6 +1,6 @@
 package model;
 
-public class Gift extends ImageObject implements FallingObject{
+public class Gift extends FallingObject{
 
 	private static final String IMAGE_PATH = "gift.png";
 	public Gift(int x, int y) {

@@ -9,10 +9,9 @@ import eg.edu.alexu.csd.oop.game.World;
 import java.util.List;
 import model.Bomb;
 import model.Gift;
-import model.ImageObject;
 import model.ListIterator;
 import model.Shape;
-import model.ShapeFactory;
+import model.FallingObjectFactory;
 
 /**
  *
@@ -25,12 +24,7 @@ public class Circus implements World,Observer{
     private final int screenWidth;
     private final int screenHeight;
     private Strategy strategy;
-    private ShapeFactory Ourfactory = new ShapeFactory() {
-        @Override
-        public Shape createShape() {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        }
-    };
+    private FallingObjectFactory Ourfactory = new FallingObjectFactory();
     
     public Circus(int width,int height,Strategy strategy){
         this.screenWidth = width;
@@ -217,11 +211,11 @@ public class Circus implements World,Observer{
 
         for (int i = 0; i < 5; i++) {
            
-            movable.add(Ourfactory.createShape()); // crate bomb
+            movable.add(Ourfactory.createFallingObject(getWidth())); // crate bomb
         }
 
         for (int i = 0; i < 2; i++) {
-            movable.add(Ourfactory.createShape());
+            movable.add(Ourfactory.createFallingObject(getWidth()));
             // creat gift
 
         }

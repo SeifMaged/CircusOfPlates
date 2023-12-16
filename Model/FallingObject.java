@@ -1,5 +1,9 @@
 package model;
 
-public interface FallingObject {
+public abstract class FallingObject extends ImageObject{
+
+	public FallingObject(String imagePath) {
+		super(imagePath);
+	}
 
 }

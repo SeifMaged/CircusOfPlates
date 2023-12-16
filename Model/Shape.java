@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 
-public abstract class Shape extends ImageObject implements FallingObject{
+public abstract class Shape extends FallingObject{
 
     private Color color;
     private ShapeColor shapeColor;

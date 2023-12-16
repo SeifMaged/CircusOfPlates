@@ -63,6 +63,10 @@ public abstract class ImageObject implements GameObject{
         return isVisible;
     }
     
+    public void setVisible(boolean isVisible) {
+    	this.isVisible = isVisible;
+    }
+    
     @Override
     public int getWidth() {
         if (image[0] != null)
