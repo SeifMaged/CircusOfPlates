@@ -1,5 +1,8 @@
 package control;
 
+import static control.GameObjectContainer.leftHand;
+import static control.GameObjectContainer.movable;
+import static control.GameObjectContainer.rightHand;
 import model.Strategy;
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.World;
@@ -9,6 +12,7 @@ import model.Gift;
 import model.ImageObject;
 import model.ListIterator;
 import model.Shape;
+import model.ShapeFactory;
 
 /**
  *
@@ -21,13 +25,19 @@ public class Circus implements World,Observer{
     private final int screenWidth;
     private final int screenHeight;
     private Strategy strategy;
-   // private GameFactory Ourfactory = new GameFactory();
+    private ShapeFactory Ourfactory = new ShapeFactory() {
+        @Override
+        public Shape createShape() {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+    };
     
     public Circus(int width,int height,Strategy strategy){
         this.screenWidth = width;
         this.screenHeight = height;
         this.strategy = strategy;
         GameObjectContainer.controllable.add(Clown.getInstance((int) (screenWidth * 0.4), (int) (screenHeight * 0.64), "/clown.png"));
+        Factory();  
     }
 
     @Override
@@ -158,26 +168,62 @@ public class Circus implements World,Observer{
     }
 
     private void increaseRight(GameObject go) {
-        
+    if ( intersect(go, rightHand.peek())) {
+        movable.remove(go);
     }
+}
+
 
     private void increaseLeft(GameObject go) {
-        
+        if ( intersect(go, leftHand.peek())) {
+        movable.remove(go);
     }
-
+    }
     private void decreaseRight(GameObject go) {
         
-    }
-
-    private void decreaseLeft(GameObject go) {
+    if (!rightHand.isEmpty() && intersect(go, rightHand.peek())) {
+        movable.remove(go);
+        ((Bomb) go).setVisible(false);
+        if (lives.getlives() > 0) {
+            lives.decreaseLives(1);
         
     }
 }
 
-    
- 
+    }
 
+    private void decreaseLeft(GameObject go) {
+        if (!leftHand.isEmpty() && intersect(go, leftHand.peek())) {
+    movable.remove(go);
+    ((Bomb) go).setVisible(false);
+    if (lives.getlives() > 0) {
+        lives.decreaseLives(1);
+    } 
+}
+
+    }
     
     
     
-          
+    ////////// edit the factory 
+    
+    private void Factory()
+    {
+        for (int i = 0; i < 15; i++) {
+
+           
+            // creat plate 
+        }
+
+        for (int i = 0; i < 5; i++) {
+           
+            movable.add(Ourfactory.createShape()); // crate bomb
+        }
+
+        for (int i = 0; i < 2; i++) {
+            movable.add(Ourfactory.createShape());
+            // creat gift
+
+        }
+    }
+}        
