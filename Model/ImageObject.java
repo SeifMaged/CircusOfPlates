@@ -3,6 +3,7 @@ package model;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -15,6 +16,7 @@ public abstract class ImageObject implements GameObject{
     private String imagePath;
     private boolean isVisible;
     private Context context;
+    private Random random = new Random();
     protected BufferedImage sourceImage;
     protected BufferedImage[] image = new BufferedImage[1];
 
@@ -86,17 +88,17 @@ public abstract class ImageObject implements GameObject{
     	return "";
     }
     public void handleMoving(){
-        this.context.request(getXMoving(), getYmoving());
+        this.context.request(getNextXPosition(), getNextYPosition());
     }
     public void changeToControlState(){
         this.context.setState(new ControlState(this));
     }
-    public int getXMoving() {
-        return this.getX() + (Math.random() > 0.5 ? 1 : -1);
+    public int getNextXPosition() {
+        return getX() + (random.nextInt(2) == 0 ? 1 : -1);
     }
     
-    public int getYmoving() {
-        return this.getY() + 1;
+    public int getNextYPosition() {
+        return getY() + 1;
     }
 	
 

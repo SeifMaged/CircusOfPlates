@@ -1,12 +1,12 @@
 package model;
 
-import eg.edu.alexu.csd.oop.game.GameObject;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+
 import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 
-public abstract class Shape extends ImageObject{
+public abstract class Shape extends ImageObject implements FallingObject{
 
     private Color color;
     private ShapeColor shapeColor;

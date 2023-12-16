@@ -1,10 +1,10 @@
 package model;
 
-public class Bomb extends ImageObject{
+public class Bomb extends ImageObject implements FallingObject{
 
-	private static final String imagePath = "bomb.png";
+	private static final String IMAGE_PATH = "bomb.png";
 	public Bomb(int x, int y) {
-		super(imagePath);
+		super(IMAGE_PATH);
 		setX(x);
 		setY(y);
 	}
