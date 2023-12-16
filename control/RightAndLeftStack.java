@@ -8,7 +8,11 @@ import java.util.Stack;
 import model.Shape;
 import model.ShapeColor;
 
+<<<<<<< HEAD
 public class RightAndLeftStack {
+=======
+public class RightAndLeftStack{
+>>>>>>> control
 
     private static final int MARGIN = 10;
     private static final int LEFT_HAND = 1;
@@ -16,10 +20,16 @@ public class RightAndLeftStack {
 
     private static int vanish;
 
+<<<<<<< HEAD
     public boolean checkIntersect(GameObject go, GameObject clown) {
 
         return checkIntersect(go, clown, GameObjectContainer.rightHand, RIGHT_HAND)
             || checkIntersect(go, clown, GameObjectContainer.leftHand, LEFT_HAND);
+=======
+    public void checkIntersect(GameObject go, GameObject clown) {
+        checkIntersect(go, clown, GameObjectContainer.rightHand, RIGHT_HAND);
+        checkIntersect(go, clown, GameObjectContainer.leftHand, LEFT_HAND);
+>>>>>>> control
     }
 
     private boolean checkIntersect(GameObject go, GameObject clown, Stack<GameObject> handStack, int handType) {
@@ -47,7 +57,7 @@ public class RightAndLeftStack {
         return intersected;
     }
 
-    private boolean intersectWithHand(GameObject o, GameObject clown, int handType) {
+    static boolean intersectWithHand(GameObject o, GameObject clown, int handType) {
         if (handType == RIGHT_HAND) {
             clown = GameObjectContainer.controllable.get(0);
 
@@ -67,7 +77,7 @@ public class RightAndLeftStack {
                 && (Math.abs((o1.getY() + o1.getHeight() / 2) - (o2.getY() + o2.getHeight() / 2)) <= o1.getHeight());
     }
 
-    private void vanishHand(Stack<GameObject> handStack) {
+    static void vanishHand(Stack<GameObject> handStack) {
         int vanishingThreshold = 3; // Number of elements required for vanishing
 
         if (handStack.size() >= vanishingThreshold) {
@@ -99,11 +109,19 @@ public class RightAndLeftStack {
         }
     }
 
+<<<<<<< HEAD
     public void VanishLeftHand() {
         vanishHand(GameObjectContainer.leftHand);
     }
 
     public void VanishRightHand() {
+=======
+    static void VanishLeftHand() {
+        vanishHand(GameObjectContainer.leftHand);
+    }
+
+    static void VanishRightHand() {
+>>>>>>> control
         vanishHand(GameObjectContainer.rightHand);
     }
 

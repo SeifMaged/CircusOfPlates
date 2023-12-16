@@ -7,6 +7,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import eg.edu.alexu.csd.oop.game.GameObject;
+import java.util.Random;
 
 public abstract class ImageObject implements GameObject{
 
@@ -14,6 +15,7 @@ public abstract class ImageObject implements GameObject{
     private int y;
     private String imagePath;
     private boolean isVisible;
+    private Context context;
     protected BufferedImage sourceImage;
     protected BufferedImage[] image = new BufferedImage[1];
 
@@ -26,7 +28,7 @@ public abstract class ImageObject implements GameObject{
             sourceImage = null;
         }
         image[0] = sourceImage;
-        
+        this.context = new Context(new MovingState(this));
 	}
 
     @Override
@@ -60,6 +62,9 @@ public abstract class ImageObject implements GameObject{
         return isVisible;
     }
     
+    public void setVisible(boolean visible) {
+        this.isVisible = visible;
+    }
     @Override
     public int getWidth() {
         if (image[0] != null)
@@ -83,6 +88,20 @@ public abstract class ImageObject implements GameObject{
     	if(imagePath != null)
     		return imagePath;
     	return "";
+    }
+    public void handleMoving(){
+        this.context.request(getNextPositionX(), getNextPositionY());
+    }
+    public void changeToControlState(){
+        this.context.setState(new ControlState(this));
+    }
+    public int getNextPositionX() {
+        Random random = new Random();
+        return this.getX() + (random.nextInt(2) == 0 ? 1 : -1);
+    }
+    
+    public int getNextPositionY() {
+        return this.getY() + 1;
     }
 	
 

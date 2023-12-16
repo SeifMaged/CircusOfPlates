@@ -5,13 +5,13 @@ import java.awt.image.BufferedImage;
 import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 
-public abstract class Shape extends ImageObject{
+public abstract class Shape extends ImageObject {
 
     private Color color;
     private ShapeColor shapeColor;
 
     public Shape(int x, int y, ShapeColor shapeColor, String imagePath) {
-    	super(imagePath);
+        super(imagePath);
         setX(x);
         setY(y);
         this.shapeColor = shapeColor;
@@ -20,15 +20,15 @@ public abstract class Shape extends ImageObject{
     }
 
     public ShapeColor getColor() {
-    	return shapeColor;
+        return shapeColor;
     }
 
     public void setColor(ShapeColor color) {
         this.shapeColor = color;
         this.color = shapeColor.getColor();
-        
+
         image[0] = applyColorToImage(sourceImage);
-        
+
     }
 
     /*
@@ -64,7 +64,4 @@ public abstract class Shape extends ImageObject{
 
         return null;
     }
-
-
 }
-

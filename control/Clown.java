@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> control
 package control;
 
 import model.ImageObject;
@@ -9,7 +13,11 @@ import model.ImageObject;
 public class Clown extends ImageObject {
     private static volatile Clown clownInstance=null;
     
+<<<<<<< HEAD
     private Clown(int x,int y,String path){
+=======
+    public Clown(int x,int y,String path){
+>>>>>>> control
     	super(path);
         setX(x);
         setY(y);
