@@ -30,8 +30,7 @@ public class Circus implements World,Observer{
         this.screenWidth = width;
         this.screenHeight = height;
         this.strategy = strategy;
-        GameObjectContainer.controllable.add(Clown.getInstance((int) (screenWidth * 0.4), (int) (screenHeight * 0.64), "clown.png"));
-        Clown.getInstance((int) (screenWidth * 0.4), (int) (screenHeight * 0.64), "clown.png");
+        GameObjectContainer.controllable.add(Clown.getInstance((int) (screenWidth * 0.4), (int) (screenHeight * 0.64), "src/resources/clown.png"));
         Factory();  
     }
 
@@ -210,15 +209,9 @@ public class Circus implements World,Observer{
             // creat plate 
         }
 
-        for (int i = 0; i < 5; i++) {
-           
+        for (int i = 0; i < 20; i++) {
             movable.add(Ourfactory.createFallingObject(getWidth())); // crate bomb
         }
 
-        for (int i = 0; i < 2; i++) {
-            movable.add(Ourfactory.createFallingObject(getWidth()));
-            // creat gift
-
-        }
     }
 }        

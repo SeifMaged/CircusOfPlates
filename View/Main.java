@@ -47,7 +47,7 @@ public class Main {
         resumeItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == pauseItem) {
+                if (e.getSource() == resumeItem) {
                     controller.resume();
                 }
             }
