@@ -1,18 +1,24 @@
 package model;
 
+import control.Circus;
+import control.Clown;
+import control.RightAndLeftStack;
+import control.Score;
+import control.Subject;
+import eg.edu.alexu.csd.oop.game.GameObject;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 
-public abstract class Shape extends FallingObject{
+public abstract class Shape extends FallingObject {
 
     private Color color;
     private ShapeColor shapeColor;
-    
+
     public Shape(int x, int y, ShapeColor shapeColor, String imagePath) {
-    	super(imagePath);
+        super(imagePath);
         setX(x);
         setY(y);
         this.shapeColor = shapeColor;
@@ -21,15 +27,15 @@ public abstract class Shape extends FallingObject{
     }
 
     public ShapeColor getColor() {
-    	return shapeColor;
+        return shapeColor;
     }
 
     public void setColor(ShapeColor color) {
         this.shapeColor = color;
         this.color = shapeColor.getColor();
-        
+
         image[0] = applyColorToImage(sourceImage);
-        
+
     }
 
     /*
@@ -66,5 +72,12 @@ public abstract class Shape extends FallingObject{
         return null;
     }
 
-}
+    @Override
+    public void caughtByClown(Circus game) {
+        this.handleMoving();
+        RightAndLeftStack.checkIntersect(this, game.getClown());
+        RightAndLeftStack.VanishLeftHand(game, game.getScore());
+        RightAndLeftStack.VanishRightHand(game, game.getScore());
+    }
 
+}

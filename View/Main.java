@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import model.Easy;
+import model.*;
 
 /**
  *
@@ -32,8 +32,19 @@ public class Main {
        menu.add(resumeItem);
        menubar.add(menu);
        
-       controller = GameEngine.start("test", new Circus(800,600,new Easy()), menubar, Color.WHITE);
+       Circus game = new Circus(800,600,new Easy());
+       
+       controller = GameEngine.start("Circus Of Plates", game, menubar, Color.WHITE);
         
+//       if(game.getScore().getScore() > 5)
+//       {
+//           game.setStrategy(new Medium());
+//       }
+//       if(game.getScore().getScore() > 8)
+//       {
+//           game.setStrategy(new Hard());
+//       }
+       
         pauseItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

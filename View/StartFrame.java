@@ -20,17 +20,17 @@ public class StartFrame extends JFrame {
     private Image background;
     private JButton startGame;
     private JButton exitGame;
-    
+
     private final String imageFile = "room10.jpg";
     private final int buttonWidth = 150;
     private final int buttonHeight = 50;
 
     public StartFrame() {
         initalizeComponents();
-        
+
         this.setTitle("Circus Of Plates");
         this.setResizable(false);
-        this.setPreferredSize(new Dimension(800,600));
+        this.setPreferredSize(new Dimension(800, 600));
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 240));
         this.pack();
         this.setLocationRelativeTo(null);
@@ -48,37 +48,41 @@ public class StartFrame extends JFrame {
     }
 
     private void setBackground() {
-    setContentPane(new JPanel() {
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
-        }
-    });
-}
+        setContentPane(new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
+            }
+        });
+    }
 
     private void setStartButton() {
-        startGame.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+        startGame.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
         startGame.setFont(new Font("Wide Latin", 0, 18));
         startGame.setForeground(new Color(153, 0, 0));
-        
-        startGame.addActionListener((ActionEvent e) -> {
-            // Strategy menu
-        });
 
-        
+//        startGame.addActionListener((ActionEvent e) -> {
+//            this.setVisible(false);
+//            new Main();
+//        });
+
         this.add(startGame);
     }
 
     private void setExitButton() {
-        exitGame.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+        exitGame.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
         exitGame.setFont(new Font("Wide Latin", 0, 18)); // NOI18N
         exitGame.setForeground(new Color(153, 0, 0));
-        
+
         exitGame.addActionListener((ActionEvent e) -> {
             System.exit(0);
         });
 
         this.add(exitGame);
+    }
+
+    public static void main(String[] args) {
+        new StartFrame();
     }
 }
