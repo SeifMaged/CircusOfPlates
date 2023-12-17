@@ -36,9 +36,18 @@ public class RightAndLeftStack{
         
         if(intersected)
         {
+            int start ; 
+            if (handType==1)
+            {
+                start = 0;
+            }
+            else 
+            {
+                start = 130;
+            }
             Shape pCaught = (Shape) go;
             GameObjectContainer.movable.remove(go);
-            pCaught.setX(clown.getX() + 130);
+            pCaught.setX(clown.getX() + start);
             pCaught.setY(yIntersection - pCaught.getHeight() / 2);
             GameObjectContainer.controllable.add(go);
             handStack.push(go);
