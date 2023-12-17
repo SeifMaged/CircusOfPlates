@@ -87,24 +87,13 @@ public class Circus implements World,Observer{
                
                 Bomb caught = (Bomb) go;
                 caught.handleMoving();
-                if (!GameObjectContainer.leftHand.isEmpty()) {
-                    decreaseLeft(go);
-                }
-                if (!GameObjectContainer.rightHand.isEmpty()) {
-                    decreaseRight(go);
-                }
+                handleBomb(caught);
             }
-
             if (go instanceof Gift) {
                 
                 Gift caught = (Gift) go;
                 caught.handleMoving();
-                if (!GameObjectContainer.leftHand.isEmpty()) {
-                    increaseLeft(go);
-                }
-                if (go instanceof Gift && !GameObjectContainer.rightHand.isEmpty()) {
-                    increaseRight(go);
-                }
+                handleGift(caught);
             }
 
             
@@ -164,43 +153,37 @@ public class Circus implements World,Observer{
     public int getControlSpeed() {
         return this.strategy.getControlSpeed();
     }
-
-    private void increaseRight(GameObject go) {
-    if ( intersect(go, rightHand.peek())) {
-        movable.remove(go);
-    }
-}
-
-
-    private void increaseLeft(GameObject go) {
-        if ( intersect(go, leftHand.peek())) {
-        movable.remove(go);
-    }
-    }
-    private void decreaseRight(GameObject go) {
-        
-    if (!rightHand.isEmpty() && intersect(go, rightHand.peek())) {
-        movable.remove(go);
-        ((Bomb) go).setVisible(false);
-        if (lives.getlives() > 0) {
-            lives.decreaseLives(1);
-        
-    }
-}
-
-    }
-
-    private void decreaseLeft(GameObject go) {
-        if (!leftHand.isEmpty() && intersect(go, leftHand.peek())) {
-    movable.remove(go);
-    ((Bomb) go).setVisible(false);
-    if (lives.getlives() > 0) {
-        lives.decreaseLives(1);
-    } 
-}
-
+    
+    private void handleGift(GameObject go){
+        if (!leftHand.isEmpty()&&intersect(go, rightHand.peek())) {
+            movable.remove(go);
+            score.increaseScore(2);
+        }
+        if (!rightHand.isEmpty()&&intersect(go, leftHand.peek())) {
+                movable.remove(go);
+                score.increaseScore(2);
+        }     
     }
     
+    private void handleBomb(GameObject go){
+        if (!rightHand.isEmpty() && intersect(go, rightHand.peek())){
+                movable.remove(go);
+                ((Bomb) go).setVisible(false);
+                if (lives.getlives() > 0) {
+                    lives.decreaseLives(1);
+
+                }
+        }
+            if (!leftHand.isEmpty() && intersect(go, leftHand.peek())) {
+                movable.remove(go);
+                ((Bomb) go).setVisible(false);
+                if (lives.getlives() > 0) {
+                    lives.decreaseLives(1);
+                } 
+            }
+    }
+    
+ 
     
     
     ////////// edit the factory 
