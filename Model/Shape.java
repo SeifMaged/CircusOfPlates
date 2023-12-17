@@ -10,13 +10,11 @@ public abstract class Shape extends FallingObject{
 
     private Color color;
     private ShapeColor shapeColor;
-    private Context context;
     
     public Shape(int x, int y, ShapeColor shapeColor, String imagePath) {
     	super(imagePath);
         setX(x);
         setY(y);
-        this.context = new Context(new MovingState(this));
         this.shapeColor = shapeColor;
         color = this.shapeColor.getColor();
         image[0] = applyColorToImage(sourceImage);
@@ -67,21 +65,6 @@ public abstract class Shape extends FallingObject{
 
         return null;
     }
-    public void handleMoving(){
-        this.context.request(getXMoving(), getYmoving());
-    }
-    public void changeToControlState(){
-        this.context.setState(new ControlState(this));
-    }
-    public int getXMoving() {
-        return this.getX();
-    }
-    
-    public int getYmoving() {
-        return this.getY() + 1;
-    }
-    
-
 
 }
 

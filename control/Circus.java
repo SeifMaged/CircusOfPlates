@@ -183,9 +183,6 @@ public class Circus implements World,Observer{
             
     }
     
- 
-    
-    
     ////////// edit the factory 
     
     private void Factory()
