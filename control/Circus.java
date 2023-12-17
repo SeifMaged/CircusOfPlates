@@ -190,14 +190,9 @@ public class Circus implements World,Observer{
     
     private void Factory()
     {
-        for (int i = 0; i < 15; i++) {
-
-           
-            // creat plate 
-        }
 
         for (int i = 0; i < 20; i++) {
-            movable.add(Ourfactory.createFallingObject(getWidth())); // crate bomb
+            movable.add(Ourfactory.createFallingObject(getHeight(), getWidth())); // crate bomb
         }
 
     }

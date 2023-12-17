@@ -10,9 +10,9 @@ public class FallingObjectFactory {
 	 * Randomly Generates FallingObjects
 	 */
 	
-	public FallingObject createFallingObject(int width){
-		int x = random.nextInt(Math.abs(width));
-		int y = random.nextInt(Math.abs(width/2)) - 400;
+	public FallingObject createFallingObject(int height, int width){
+		int x = random.nextInt(Math.abs(width - 20));
+		int y = random.nextInt(Math.abs(height/2)) - height/2;
 		int shapeType = random.nextInt(5) + 1;
 		int colorChooser = random.nextInt(3) + 1;
 		ShapeColor color = null;
