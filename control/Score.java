@@ -9,7 +9,7 @@ public class Score extends Subject{
     private int score=0;
     
     public void increaseScore(int increment){
-        score +=increment;
+        this.score +=increment;
         notifyAllSubscribers();
     }
     

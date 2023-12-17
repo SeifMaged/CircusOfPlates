@@ -1,5 +1,6 @@
 package control;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * @author adham
  */
 public abstract class Subject {
-    protected List <Observer> observers;
+    protected List <Observer> observers = new ArrayList<Observer>();
 
     public void subscribe(Observer observer) {
         observers.add(observer);

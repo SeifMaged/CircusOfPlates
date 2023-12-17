@@ -96,7 +96,7 @@ public abstract class ImageObject implements GameObject{
         this.context.setState(new ControlState(this));
     }
     public int getNextXPosition() {
-        return getX() + (random.nextInt(2) == 0 ? 1 : -1);
+        return getX();
     }
     
     public int getNextYPosition() {

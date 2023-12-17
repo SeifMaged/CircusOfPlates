@@ -1,5 +1,10 @@
 package control;
 
+import static control.GameObjectContainer.leftHand;
+import control.Circus;
+import static control.GameObjectContainer.controllable;
+import static control.GameObjectContainer.movable;
+import static control.GameObjectContainer.rightHand;
 import eg.edu.alexu.csd.oop.game.GameObject;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +21,12 @@ public class RightAndLeftStack{
 
     private static int vanish;
 
-    public void checkIntersect(GameObject go, GameObject clown) {
+    public static void checkIntersect(GameObject go, GameObject clown) {
         checkIntersect(go, clown, GameObjectContainer.rightHand, RIGHT_HAND);
         checkIntersect(go, clown, GameObjectContainer.leftHand, LEFT_HAND);
     }
 
-    private boolean checkIntersect(GameObject go, GameObject clown, Stack<GameObject> handStack, int handType) {
+    private static boolean checkIntersect(GameObject go, GameObject clown, Stack<GameObject> handStack, int handType) {
         int yIntersection = 0; // this initialization won't affect anything
         boolean intersected = false;
         
@@ -36,11 +41,20 @@ public class RightAndLeftStack{
         
         if(intersected)
         {
+            int start ; 
+            if (handType==1)
+            {
+                start = 0;
+            }
+            else 
+            {
+                start = 130;
+            }
             Shape pCaught = (Shape) go;
-            GameObjectContainer.movable.remove(go);
-            pCaught.setX(clown.getX() + 130);
+            movable.remove(go);
+            pCaught.setX(clown.getX() + start);
             pCaught.setY(yIntersection - pCaught.getHeight() / 2);
-            GameObjectContainer.controllable.add(go);
+            controllable.add(go);
             handStack.push(go);
         }
         
@@ -49,25 +63,25 @@ public class RightAndLeftStack{
 
     static boolean intersectWithHand(GameObject o, GameObject clown, int handType) {
         if (handType == RIGHT_HAND) {
-            clown = GameObjectContainer.controllable.get(0);
+            clown = controllable.get(0);
 
             return (Math.abs(clown.getX() + clown.getWidth() - (o.getX() + o.getWidth())) <= o.getWidth() - MARGIN
-                    && o.getY() == GameObjectContainer.controllable.get(0).getY() - MARGIN);
+                    && o.getY() == controllable.get(0).getY() - MARGIN);
         } else {
 
-            clown = GameObjectContainer.controllable.get(0);
+            clown = controllable.get(0);
 
             return (Math.abs(clown.getX() - o.getX()) <= o.getWidth() - MARGIN
-                    && o.getY() == GameObjectContainer.controllable.get(0).getY() - MARGIN);
+                    && o.getY() == controllable.get(0).getY() - MARGIN);
         }
     }
 
-    private boolean intersect(GameObject o1, GameObject o2) {
+    private static boolean intersect(GameObject o1, GameObject o2) {
         return (Math.abs((o1.getX() + o1.getWidth() / 2) - (o2.getX() + o2.getWidth() / 2)) <= o1.getWidth())
                 && (Math.abs((o1.getY() + o1.getHeight() / 2) - (o2.getY() + o2.getHeight() / 2)) <= o1.getHeight());
     }
 
-    static void vanishHand(Stack<GameObject> handStack) {
+    private static boolean vanishHand(Stack<GameObject> handStack,Circus circus) {
         int vanishingThreshold = 3; // Number of elements required for vanishing
 
         if (handStack.size() >= vanishingThreshold) {
@@ -88,23 +102,29 @@ public class RightAndLeftStack{
             }
 
             if (areColorsEqual) {
-                for (Shape shapes : platesToRemove) {
-                    GameObjectContainer.controllable.remove(shapes);
-                    // reusePlates(plate);
+                for (Shape shape : platesToRemove) {
+                    controllable.remove(shape);
+                    
+                    circus.reusePlates(shape);
                 }
                 vanish++;
+                return true;
             } else {
                 handStack.addAll(platesToRemove);
+                return false;
             }
         }
+        return false;
     }
 
-    static void VanishLeftHand() {
-        vanishHand(GameObjectContainer.leftHand);
+    static void VanishLeftHand(Circus circus,Score score) {
+        if(vanishHand(leftHand,circus))
+            score.increaseScore(1);
     }
 
-    static void VanishRightHand() {
-        vanishHand(GameObjectContainer.rightHand);
+    static void VanishRightHand(Circus circus,Score score) {
+        if(vanishHand(rightHand,circus))
+            score.increaseScore(1);
     }
 
     public static int getVanish() {
