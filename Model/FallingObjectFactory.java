@@ -12,8 +12,8 @@ public class FallingObjectFactory {
 	
 	public FallingObject createFallingObject(int width){
 		int x = random.nextInt(Math.abs(width));
-		int y = 0;
-		int shapeType = random.nextInt(3) + 1;
+		int y = random.nextInt(Math.abs(width/2)) - 400;
+		int shapeType = random.nextInt(5) + 1;
 		int colorChooser = random.nextInt(3) + 1;
 		ShapeColor color = null;
 		FallingObject fallingObject = null;
@@ -46,6 +46,16 @@ public class FallingObjectFactory {
 				break;
 			}
 			
+			case 4 -> {
+				fallingObject = new Plate(x, y, color);
+				break;
+			}
+			
+			case 5
+			-> {
+				fallingObject = new Plate(x, y, color);
+				break;
+			}
 			default -> {
 				fallingObject = null;
 			}

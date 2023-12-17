@@ -53,10 +53,7 @@ public abstract class ImageObject implements GameObject{
 
     @Override
     public void setY(int y) {
-    	if(y > 0)
         	this.y = y;
-        else
-        	this.y = 0;
     }
 
     @Override
