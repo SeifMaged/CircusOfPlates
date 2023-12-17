@@ -74,7 +74,7 @@ public abstract class Shape extends FallingObject{
         this.context.setState(new ControlState(this));
     }
     public int getXMoving() {
-        return this.getX() + (Math.random() > 0.5 ? 1 : -1);
+        return this.getX();
     }
     
     public int getYmoving() {

@@ -7,7 +7,6 @@ import model.Strategy;
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.World;
 import java.util.List;
-import java.util.Stack;
 import model.Bomb;
 import model.Gift;
 import model.ListIterator;
@@ -80,8 +79,8 @@ public class Circus implements World,Observer{
                 Shape caught = (Shape) go;
                 caught.handleMoving();
                 RightAndLeftStack.checkIntersect(go,clown);
-                RightAndLeftStack.VanishLeftHand();
-                RightAndLeftStack.VanishRightHand();
+                RightAndLeftStack.VanishLeftHand(this,score);
+                RightAndLeftStack.VanishRightHand(this,score);
             }
             if (go instanceof Bomb) {
                
@@ -121,7 +120,7 @@ public class Circus implements World,Observer{
     return horizontalDistance <= maxHorizontalDistance && verticalDistance <= maxVerticalDistance;
     }
 
-    private void reusePlates(GameObject p) {
+    void reusePlates(GameObject p) {
 
         p.setY(-1 * (int) (Math.random() * getHeight()));
         p.setX((int) (Math.random() * getWidth()));
@@ -155,17 +154,24 @@ public class Circus implements World,Observer{
     }
     
     private void handleGift(GameObject go){
-        if (!leftHand.isEmpty()&&intersect(go, rightHand.peek())) {
+        if (!leftHand.isEmpty()&&intersect(go, leftHand.peek())) {
             movable.remove(go);
             score.increaseScore(2);
         }
-        if (!rightHand.isEmpty()&&intersect(go, leftHand.peek())) {
+        if (!rightHand.isEmpty()&&intersect(go, rightHand.peek())) {
                 movable.remove(go);
                 score.increaseScore(2);
         }     
     }
     
     private void handleBomb(GameObject go){
+        if (!leftHand.isEmpty() && intersect(go, leftHand.peek())) {
+                movable.remove(go);
+                ((Bomb) go).setVisible(false);
+                if (lives.getlives() > 0) {
+                    lives.decreaseLives(1);
+                } 
+            }
         if (!rightHand.isEmpty() && intersect(go, rightHand.peek())){
                 movable.remove(go);
                 ((Bomb) go).setVisible(false);
@@ -174,13 +180,7 @@ public class Circus implements World,Observer{
 
                 }
         }
-            if (!leftHand.isEmpty() && intersect(go, leftHand.peek())) {
-                movable.remove(go);
-                ((Bomb) go).setVisible(false);
-                if (lives.getlives() > 0) {
-                    lives.decreaseLives(1);
-                } 
-            }
+            
     }
     
  
