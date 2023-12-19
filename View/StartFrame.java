@@ -25,7 +25,7 @@ public class StartFrame extends JFrame {
     private JMenuItem resumeItem;
 
     private final String starterImageFile = "src/resources/circus10.jpg";
-    private final String backgroundFile = "src/resources/background.jpg";
+    //private final String backgroundFile = "src/resources/background.jpg";
     private final String soundFile = "src/resources/circus.wav";
     private final int buttonWidth = 150;
     private final int buttonHeight = 50;
