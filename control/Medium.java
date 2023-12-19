@@ -7,7 +7,7 @@ public class Medium implements Strategy{
 
     @Override
     public int getObjectSpeed() {
-        return 20;
+        return 10;
     }
 
     @Override

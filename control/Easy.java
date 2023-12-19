@@ -7,12 +7,12 @@ public class Easy implements Strategy{
 
     @Override
     public int getObjectSpeed() {
-        return 15;
+        return 20;
     }
 
     @Override
     public int getControlSpeed() {
-        return 15;
+        return 20;
     }
 
     @Override

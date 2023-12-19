@@ -12,31 +12,41 @@ import model.*;
  */
 public class Circus implements World, Observer {
     
-    private final static Circus instance = new Circus(800,600,new Easy());
+    private static volatile Circus instance;
 
-    private final Score score = new Score();
-    private final Lives lives = new Lives();
+    private final String backgroundFile = "src/resources/background.png";
+    private final Score score;
+    private final Lives lives;
 
-    private final int screenWidth;
-    private final int screenHeight;
+    private final static int screenWidth = 800;
+    private final static int screenHeight = 600;
     private Strategy strategy;
     private final FallingObjectFactory Ourfactory = new FallingObjectFactory();
     private final Clown clown;
 
-    private Circus(int width, int height, Strategy strategy) {
-        this.screenWidth = width;
-        this.screenHeight = height;
+    private Circus(Strategy strategy) {
         this.strategy = strategy;
+        this.score = new Score();
+        this.lives = new Lives(strategy.getLives());
         
-        clown = Clown.getInstance((int) (screenWidth * 0.4), (int) (screenHeight * 0.64), "src/resources/clown.png");
+        clown = Clown.getInstance();
         GameObjectContainer.controllable.add(clown);
         
         Factory();
         this.score.subscribe(this);
         this.lives.subscribe(this);
+        GameObjectContainer.constant.add(new BackGround(backgroundFile));
     }
     
-    public static Circus getInstance(){
+    public static synchronized Circus getInstance(){
+        if(instance == null){
+            synchronized(Circus.class){
+                if(instance == null){
+                    instance = new Circus(new Easy());
+                }
+            }
+        }
+        
         return instance;
     }
 
@@ -57,12 +67,12 @@ public class Circus implements World, Observer {
 
     @Override
     public int getWidth() {
-        return this.screenWidth;
+        return screenWidth;
     }
 
     @Override
     public int getHeight() {
-        return this.screenHeight;
+        return screenHeight;
     }
 
 // will be implmented.
@@ -79,13 +89,34 @@ public class Circus implements World, Observer {
                 reuseShapes(go);
             }
             
-            go.caughtByClown(this);
+            go.caughtByClown();
         }
 
         if (lives.getlives() == 0) {
             flag = true;
         }
+        
+        if(GameObjectContainer.movable.size() < 7){
+            Factory();
+        }
+        
+        if(getScore().getScore() > 8){
+            setStrategy(new Medium());
+        }
+        
+        if(getScore().getScore() > 20){
+            setStrategy(new Hard());
+        }
+        
         return !flag;
+    }
+
+    public static int getScreenWidth() {
+        return screenWidth;
+    }
+
+    public static int getScreenHeight() {
+        return screenHeight;
     }
 
     public boolean intersect(GameObject object1, GameObject object2) {
@@ -150,10 +181,6 @@ public class Circus implements World, Observer {
 
     public Lives getLives() {
         return lives;
-    }
-
-    public Clown getClown() {
-        return clown;
     }
     
     public void setStrategy(Strategy s){

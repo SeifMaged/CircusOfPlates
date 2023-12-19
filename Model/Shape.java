@@ -2,9 +2,6 @@ package model;
 
 import control.Circus;
 import control.RightAndLeftStack;
-import control.Score;
-import control.Subject;
-import eg.edu.alexu.csd.oop.game.GameObject;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
@@ -72,9 +69,10 @@ public abstract class Shape extends FallingObject {
     }
 
     @Override
-    public void caughtByClown(Circus game) {
+    public void caughtByClown() {
         this.handleMoving();
-        RightAndLeftStack.checkIntersect(this, game.getClown());
+        Circus game = Circus.getInstance();
+        RightAndLeftStack.checkIntersect(this, Clown.getInstance());
         RightAndLeftStack.VanishLeftHand(game, game.getScore());
         RightAndLeftStack.VanishRightHand(game, game.getScore());
     }

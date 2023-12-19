@@ -2,7 +2,6 @@ package model;
 
 import control.Circus;
 import control.GameObjectContainer;
-import eg.edu.alexu.csd.oop.game.GameObject;
 
 public class Bomb extends FallingObject {
 
@@ -15,22 +14,24 @@ public class Bomb extends FallingObject {
     }
 
     @Override
-    public void caughtByClown(Circus game) {
+    public void caughtByClown() {
         this.handleMoving();
-
+        Circus game = Circus.getInstance();
         if (!GameObjectContainer.leftHand.isEmpty() && game.intersect(this, GameObjectContainer.leftHand.peek())) {
             GameObjectContainer.movable.remove(this);
             this.setVisible(false);
-            if (game.getLives().getlives() > 0) {
-                game.getLives().decreaseLives(1);
-            }
+            game.getLives().decreaseLives(1);
+
         }
         if (!GameObjectContainer.rightHand.isEmpty() && game.intersect(this, GameObjectContainer.rightHand.peek())) {
             GameObjectContainer.movable.remove(this);
             this.setVisible(false);
-            if (game.getLives().getlives() > 0) {
-                game.getLives().decreaseLives(1);
-            }
+            game.getLives().decreaseLives(1);
+        }
+        if (game.intersect(this, Clown.getInstance())) {
+            GameObjectContainer.movable.remove(this);
+            this.setVisible(false);
+            game.getLives().decreaseLives(1);
         }
 
     }

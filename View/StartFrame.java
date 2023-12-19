@@ -25,7 +25,6 @@ public class StartFrame extends JFrame {
     private JMenuItem resumeItem;
 
     private final String starterImageFile = "src/resources/circus10.jpg";
-    //private final String backgroundFile = "src/resources/background.jpg";
     private final String soundFile = "src/resources/circus.wav";
     private final int buttonWidth = 150;
     private final int buttonHeight = 50;
@@ -88,7 +87,7 @@ public class StartFrame extends JFrame {
 
             clip.start();
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            System.out.println("no");
+            System.out.println("Error loading sound");
         }
     }
     
@@ -111,7 +110,7 @@ public class StartFrame extends JFrame {
         startGame.addActionListener((ActionEvent e) -> {
             this.setVisible(false);
             Circus game = Circus.getInstance();
-            controller = GameEngine.start("Circus Of Plates", game, menubar, Color.WHITE);
+            controller = GameEngine.start("Circus Of Plates", game, menubar);
             playSound(soundFile);
         });
 

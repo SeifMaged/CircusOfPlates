@@ -2,7 +2,6 @@ package model;
 
 import control.Circus;
 import control.GameObjectContainer;
-import eg.edu.alexu.csd.oop.game.GameObject;
 
 public class Gift extends FallingObject {
 
@@ -15,14 +14,19 @@ public class Gift extends FallingObject {
     }
 
     @Override
-    public void caughtByClown(Circus game) {
+    public void caughtByClown() {
         this.handleMoving();
+        Circus game = Circus.getInstance();
 
         if (!GameObjectContainer.leftHand.isEmpty() && game.intersect(this, GameObjectContainer.leftHand.peek())) {
             GameObjectContainer.movable.remove(this);
             game.getScore().increaseScore(2);
         }
         if (!GameObjectContainer.rightHand.isEmpty() && game.intersect(this, GameObjectContainer.rightHand.peek())) {
+            GameObjectContainer.movable.remove(this);
+            game.getScore().increaseScore(2);
+        }
+        if(game.intersect(this, Clown.getInstance())){
             GameObjectContainer.movable.remove(this);
             game.getScore().increaseScore(2);
         }
