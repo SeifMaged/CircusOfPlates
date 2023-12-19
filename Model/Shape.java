@@ -1,7 +1,6 @@
 package model;
 
 import control.Circus;
-import control.Clown;
 import control.RightAndLeftStack;
 import control.Score;
 import control.Subject;

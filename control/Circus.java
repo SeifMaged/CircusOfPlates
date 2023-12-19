@@ -1,6 +1,6 @@
 package control;
 
-import model.Strategy;
+import model.Clown;
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.World;
 import java.util.List;
@@ -11,6 +11,8 @@ import model.*;
  * @author Adham
  */
 public class Circus implements World, Observer {
+    
+    private final static Circus instance = new Circus(800,600,new Easy());
 
     private final Score score = new Score();
     private final Lives lives = new Lives();
@@ -21,7 +23,7 @@ public class Circus implements World, Observer {
     private final FallingObjectFactory Ourfactory = new FallingObjectFactory();
     private final Clown clown;
 
-    public Circus(int width, int height, Strategy strategy) {
+    private Circus(int width, int height, Strategy strategy) {
         this.screenWidth = width;
         this.screenHeight = height;
         this.strategy = strategy;
@@ -32,6 +34,10 @@ public class Circus implements World, Observer {
         Factory();
         this.score.subscribe(this);
         this.lives.subscribe(this);
+    }
+    
+    public static Circus getInstance(){
+        return instance;
     }
 
     @Override
@@ -70,7 +76,7 @@ public class Circus implements World, Observer {
             intersectedWithMoving(go);
 
             if (go.getY() == getHeight()) {
-                reusePlates(go);
+                reuseShapes(go);
             }
             
             go.caughtByClown(this);
@@ -94,11 +100,11 @@ public class Circus implements World, Observer {
 
         double maxHorizontalDistance = object1.getWidth() / 2;
         double maxVerticalDistance = object1.getHeight() / 2;
-        //System.out.println(horizontalDistance <= maxHorizontalDistance && verticalDistance <= maxVerticalDistance);
+        
         return horizontalDistance <= maxHorizontalDistance && verticalDistance <= maxVerticalDistance;
     }
 
-    void reusePlates(GameObject p) {
+    void reuseShapes(GameObject p) {
 
         p.setY(-1 * (int) (Math.random() * getHeight()));
         p.setX((int) (Math.random() * getWidth()));
@@ -110,7 +116,7 @@ public class Circus implements World, Observer {
         while (l.hasNext()) {
             GameObject gameObject = l.next();
             if (x != gameObject && intersect(x, gameObject) && x.getY() == 0 && !(x instanceof Bomb) && !(x instanceof Gift)) {
-                reusePlates(gameObject);
+                reuseShapes(gameObject);
             }
         }
     }

@@ -104,7 +104,7 @@ public class RightAndLeftStack{
                 for (Shape shape : platesToRemove) {
                     GameObjectContainer.controllable.remove(shape);
                     
-                    circus.reusePlates(shape);
+                    circus.reuseShapes(shape);
                 }
                 vanish++;
                 return true;
