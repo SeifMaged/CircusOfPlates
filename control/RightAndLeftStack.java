@@ -16,9 +16,12 @@ public class RightAndLeftStack{
 
     private static int vanish;
 
-    public static void checkIntersect(GameObject go, GameObject clown) {
-        checkIntersect(go, clown, GameObjectContainer.rightHand, RIGHT_HAND);
-        checkIntersect(go, clown, GameObjectContainer.leftHand, LEFT_HAND);
+    public static boolean checkIntersect(GameObject go, GameObject clown) {
+        if(checkIntersect(go, clown, GameObjectContainer.rightHand, RIGHT_HAND))
+            return true;
+        else if(checkIntersect(go, clown, GameObjectContainer.leftHand, LEFT_HAND))
+            return true;
+        return false;
     }
 
     private static boolean checkIntersect(GameObject go, GameObject clown, Stack<GameObject> handStack, int handType) {

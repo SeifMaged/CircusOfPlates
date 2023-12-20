@@ -10,11 +10,12 @@ import eg.edu.alexu.csd.oop.game.GameObject;
 
 public abstract class ImageObject implements GameObject {
 
-    private int x;
+    protected int x;
     private int y;
     private String imagePath;
     private boolean isVisible;
     private final Context context;
+    protected boolean horizontalOnly;
     protected BufferedImage sourceImage;
     protected BufferedImage[] image = new BufferedImage[1];
 
@@ -51,7 +52,10 @@ public abstract class ImageObject implements GameObject {
 
     @Override
     public void setY(int y) {
-        this.y = y;
+        if(this.horizontalOnly==false)
+            this.y = y;
+        else if(this.horizontalOnly==true&&y==0)
+            this.y=0;
     }
 
     @Override

@@ -15,7 +15,9 @@ public class Clown extends ImageObject {
     	super(path);
         setX(x);
         setY(y);
+        this.horizontalOnly=true;
     }
+    
     
     public static synchronized Clown getInstance() {
         if (clownInstance == null) {
@@ -29,6 +31,7 @@ public class Clown extends ImageObject {
         }
         return clownInstance;
     }
+
     
 //    @Override
 //    public void setY(int y) {
