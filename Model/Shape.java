@@ -1,6 +1,8 @@
 package model;
 
 import control.Circus;
+import static control.GameObjectContainer.leftHand;
+import static control.GameObjectContainer.rightHand;
 import control.RightAndLeftStack;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -77,6 +79,22 @@ public abstract class Shape extends FallingObject {
         RightAndLeftStack.VanishLeftHand(game, game.getScore());
         RightAndLeftStack.VanishRightHand(game, game.getScore());
        
+    }
+    
+    @Override
+    public void setX(int x) {
+        if(x>600&&leftHand.contains(this))
+            this.x=600;
+        else if(x<125&&rightHand.contains(this))
+            this.x=125;
+        else if (x > 0) {
+            this.x = x;
+        }
+        
+        
+        else {
+            this.x = 0;
+        }
     }
     
 
