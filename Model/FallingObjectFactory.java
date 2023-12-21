@@ -42,7 +42,7 @@ public class FallingObjectFactory {
             }
 
             case 4 -> {
-                fallingObject = new Candy(x, y, color);
+                fallingObject = new Plate(x, y, color);
                 break;
             }
 

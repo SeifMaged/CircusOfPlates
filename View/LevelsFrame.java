@@ -94,7 +94,8 @@ public class LevelsFrame extends JFrame{
     }
 
     public void playSound(String soundFilePath) {
-        try {
+        /*
+    	try {
             File soundFile = new File(soundFilePath);
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
             Clip clip = AudioSystem.getClip();
@@ -107,6 +108,7 @@ public class LevelsFrame extends JFrame{
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             System.out.println("Error loading sound");
         }
+        */
     }
 
     private void setBackground() {
