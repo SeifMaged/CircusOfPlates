@@ -29,7 +29,10 @@ public class RightAndLeftStack{
         boolean intersected = false;
         
         if (handStack.isEmpty() && intersectWithHand(go, clown, handType)) {
-            yIntersection = clown.getY();
+            if(handType == RIGHT_HAND)
+            	yIntersection = clown.getY() + 62;
+            else
+            	yIntersection = clown.getY() + 42;
             intersected = true;
 
         } else if (!handStack.isEmpty() && intersect(go, handStack.peek())) {
@@ -42,11 +45,11 @@ public class RightAndLeftStack{
             int start ; 
             if (handType==1)
             {
-                start = 0;
+                start = -18;
             }
             else 
             {
-                start = 130;
+                start = 106;
             }
             Shape pCaught = (Shape) go;
             GameObjectContainer.movable.remove(go);
@@ -64,7 +67,7 @@ public class RightAndLeftStack{
         
         if (handType == RIGHT_HAND) {
 
-            return (Math.abs(clown.getX() + clown.getWidth() - (o.getX() + o.getWidth())) <= o.getWidth() - MARGIN
+            return (Math.abs((clown.getX() + clown.getWidth()) - (o.getX() + o.getWidth())) <= o.getWidth() - MARGIN
                     && o.getY() == clown.getY() - MARGIN);
         } else {
 

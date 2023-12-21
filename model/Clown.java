@@ -23,7 +23,7 @@ public class Clown extends ImageObject {
         if (clownInstance == null) {
             synchronized (Clown.class) {
                 if (clownInstance == null) {
-                    double width = Circus.getScreenWidth() * 0.4;
+                    double width = Circus.getScreenWidth() * 0.42; // centers the clown
                     double height = Circus.getScreenHeight() * 0.64;
                     Clown.clownInstance = clownInstance = new Clown((int)width, (int)height, clownImage);
                 }
@@ -31,10 +31,12 @@ public class Clown extends ImageObject {
         }
         return clownInstance;
     }
-
     
-//    @Override
-//    public void setY(int y) {
-//        
-//    }
+    @Override
+    public void setX(int x) {
+    	// Limits the clown's horizontal Movement
+        if (x > 10 && x < Circus.getScreenWidth() - (int)(0.2 * Circus.getScreenWidth()))
+            super.setX(x);
+    }
+
 }

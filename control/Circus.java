@@ -23,7 +23,7 @@ public class Circus implements World, Observer {
     public Circus(Strategy strategy) {
         this.strategy = strategy;
         this.score = new Score();
-        this.lives = new Lives(this.strategy.getLives());
+        this.lives = new Lives(strategy.getLives());
         
         clown = Clown.getInstance();
         GameObjectContainer.controllable.add(clown);
@@ -84,11 +84,11 @@ public class Circus implements World, Observer {
             Factory();
         }
         
-        if((this.getScore()).getScore() > 2){
+        if(getScore().getScore() > 8){
             setStrategy(new Medium());
         }
         
-        if((this.getScore()).getScore() > 5){
+        if(getScore().getScore() > 20){
             setStrategy(new Hard());
         }
         
