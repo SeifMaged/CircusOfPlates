@@ -11,7 +11,7 @@ public class Clown extends ImageObject {
     private static volatile Clown clownInstance = null;
     private static final String clownImage = "src/resources/clown.png";
     
-    public Clown(int x,int y,String path){
+    private Clown(int x,int y,String path){
     	super(path);
         setX(x);
         setY(y);

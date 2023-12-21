@@ -5,7 +5,6 @@ import java.util.Random;
 public class FallingObjectFactory {
 
     private static final Random random = new Random();
-
     /*
 	 * Randomly Generates FallingObjects
      */
@@ -43,7 +42,7 @@ public class FallingObjectFactory {
             }
 
             case 4 -> {
-                fallingObject = new Plate(x, y, color);
+                fallingObject = new Candy(x, y, color);
                 break;
             }
 

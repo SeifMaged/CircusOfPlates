@@ -1,6 +1,5 @@
 package control;
 
-import model.Clown;
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.World;
 import java.util.List;
@@ -27,7 +26,7 @@ public class Circus implements World, Observer {
     private Circus(Strategy strategy) {
         this.strategy = strategy;
         this.score = new Score();
-        this.lives = new Lives(strategy.getLives());
+        this.lives = new Lives(this.strategy.getLives());
         
         clown = Clown.getInstance();
         GameObjectContainer.controllable.add(clown);
@@ -100,11 +99,11 @@ public class Circus implements World, Observer {
             Factory();
         }
         
-        if(getScore().getScore() > 8){
+        if((this.getScore()).getScore() > 2){
             setStrategy(new Medium());
         }
         
-        if(getScore().getScore() > 20){
+        if((this.getScore()).getScore() > 5){
             setStrategy(new Hard());
         }
         

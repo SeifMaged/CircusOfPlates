@@ -45,7 +45,9 @@ public class StartFrame extends JFrame {
     private void initalizeComponents() {
         background = new ImageIcon(starterImageFile).getImage();
         startGame = new JButton("Start");
+        startGame.setFocusable(false);
         exitGame = new JButton("Exit");
+        exitGame.setFocusable(false);
 
         menubar = new JMenuBar();
         menu = new JMenu("Options");
