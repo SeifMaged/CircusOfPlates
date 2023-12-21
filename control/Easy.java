@@ -7,7 +7,7 @@ public class Easy implements Strategy{
 
     @Override
     public int getObjectSpeed() {
-        return 1;
+        return 20;
     }
 
     @Override

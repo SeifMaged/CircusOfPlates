@@ -7,7 +7,7 @@ public class Hard implements Strategy{
 
     @Override
     public int getObjectSpeed() {
-        return 100;
+        return 1;
     }
 
     @Override

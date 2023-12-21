@@ -28,7 +28,7 @@ public class FallingObjectFactory {
         switch (shapeType) {
 
             case 1 -> {
-                fallingObject = new Plate(x, y, color);
+                fallingObject = new Candy(x, y, color);
                 break;
             }
 
@@ -47,7 +47,7 @@ public class FallingObjectFactory {
             }
 
             case 5 -> {
-                fallingObject = new Plate(x, y, color);
+                fallingObject = new Candy(x, y, color);
                 break;
             }
             default -> {
