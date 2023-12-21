@@ -1,5 +1,7 @@
 package model;
 
+import control.Circus;
+
 public abstract class FallingObject extends ImageObject{
 
 	public FallingObject(String imagePath) {
@@ -7,5 +9,5 @@ public abstract class FallingObject extends ImageObject{
                 this.horizontalOnly=false;
 	}
 
-        public abstract void caughtByClown();
+        public abstract void caughtByClown(Circus game);
 }

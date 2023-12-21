@@ -71,9 +71,8 @@ public abstract class Shape extends FallingObject {
     }
 
     @Override
-    public void caughtByClown() {
+    public void caughtByClown(Circus game) {
         this.handleMoving();
-        Circus game = Circus.getInstance();
         if(RightAndLeftStack.checkIntersect(this, Clown.getInstance()))
             this.horizontalOnly=true;
         RightAndLeftStack.VanishLeftHand(game, game.getScore());
