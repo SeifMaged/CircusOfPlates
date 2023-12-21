@@ -10,9 +10,6 @@ import model.*;
  * @author Adham
  */
 public class Circus implements World, Observer {
-    
-    private static volatile Circus instance;
-
     private final String backgroundFile = "src/resources/background.png";
     private final Score score;
     private final Lives lives;
@@ -23,7 +20,7 @@ public class Circus implements World, Observer {
     private final FallingObjectFactory Ourfactory = new FallingObjectFactory();
     private final Clown clown;
 
-    private Circus(Strategy strategy) {
+    public Circus(Strategy strategy) {
         this.strategy = strategy;
         this.score = new Score();
         this.lives = new Lives(strategy.getLives());
@@ -35,18 +32,6 @@ public class Circus implements World, Observer {
         this.score.subscribe(this);
         this.lives.subscribe(this);
         GameObjectContainer.constant.add(new BackGround(backgroundFile));
-    }
-    
-    public static synchronized Circus getInstance(){
-        if(instance == null){
-            synchronized(Circus.class){
-                if(instance == null){
-                    instance = new Circus(new Easy());
-                }
-            }
-        }
-        
-        return instance;
     }
 
     @Override
@@ -88,7 +73,7 @@ public class Circus implements World, Observer {
                 reuseShapes(go);
             }
             
-            go.caughtByClown();
+            go.caughtByClown(this);
         }
 
         if (lives.getlives() == 0) {

@@ -14,9 +14,8 @@ public class Bomb extends FallingObject {
     }
 
     @Override
-    public void caughtByClown() {
+    public void caughtByClown(Circus game) {
         this.handleMoving();
-        Circus game = Circus.getInstance();
         if (!GameObjectContainer.leftHand.isEmpty() && game.intersect(this, GameObjectContainer.leftHand.peek())) {
             GameObjectContainer.movable.remove(this);
             this.setVisible(false);
