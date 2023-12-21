@@ -10,6 +10,7 @@ import model.*;
  * @author Adham
  */
 public class Circus implements World, Observer {
+
     private final String backgroundFile = "src/resources/background.png";
     private final Score score;
     private final Lives lives;
@@ -24,10 +25,10 @@ public class Circus implements World, Observer {
         this.strategy = strategy;
         this.score = new Score();
         this.lives = new Lives(strategy.getLives());
-        
+
         clown = Clown.getInstance();
         GameObjectContainer.controllable.add(clown);
-        
+
         Factory();
         this.score.subscribe(this);
         this.lives.subscribe(this);
@@ -66,32 +67,38 @@ public class Circus implements World, Observer {
         boolean flag = false;
         while (list.hasNext()) {
 
-            FallingObject go = (FallingObject)list.next();
+            FallingObject go = (FallingObject) list.next();
             intersectedWithMoving(go);
 
             if (go.getY() == getHeight()) {
                 reuseShapes(go);
             }
-            
+
             go.caughtByClown(this);
         }
 
         if (lives.getlives() == 0) {
             flag = true;
         }
-        
-        if(GameObjectContainer.movable.size() < 7){
+
+        int nonShapeCounter = 0;
+        for (var object : GameObjectContainer.movable) {
+            if (!(object instanceof Shape)) {
+                nonShapeCounter++;
+            }
+        }
+        if(nonShapeCounter > GameObjectContainer.movable.size() / 2){
             Factory();
         }
-        
-        if(getScore().getScore() > 8){
+
+        if (getScore().getScore() > 8) {
             setStrategy(new Medium());
         }
-        
-        if(getScore().getScore() > 20){
+
+        if (getScore().getScore() > 20) {
             setStrategy(new Hard());
         }
-        
+
         return !flag;
     }
 
@@ -115,7 +122,7 @@ public class Circus implements World, Observer {
 
         double maxHorizontalDistance = object1.getWidth() / 2;
         double maxVerticalDistance = object1.getHeight() / 2;
-        
+
         return horizontalDistance <= maxHorizontalDistance && verticalDistance <= maxVerticalDistance;
     }
 
@@ -166,9 +173,9 @@ public class Circus implements World, Observer {
     public Lives getLives() {
         return lives;
     }
-    
-    public void setStrategy(Strategy s){
+
+    public void setStrategy(Strategy s) {
         this.strategy = s;
     }
-    
+
 }
