@@ -10,6 +10,7 @@ import model.*;
  * @author Adham
  */
 public class Circus implements World, Observer {
+
     private final String backgroundFile = "src/resources/background.png";
     private final Score score;
     private final Lives lives;
@@ -24,10 +25,10 @@ public class Circus implements World, Observer {
         this.strategy = strategy;
         this.score = new Score();
         this.lives = new Lives(strategy.getLives());
-        
+
         clown = Clown.getInstance();
         GameObjectContainer.controllable.add(clown);
-        
+
         Factory();
         this.score.subscribe(this);
         this.lives.subscribe(this);
@@ -66,33 +67,44 @@ public class Circus implements World, Observer {
         boolean flag = false;
         while (list.hasNext()) {
 
-            FallingObject go = (FallingObject)list.next();
-            intersectedWithMoving(go);
+            FallingObject go = (FallingObject) list.next();
+            //RightAndLeftStack.checkIntersect(go, clown);
 
             if (go.getY() == getHeight()) {
                 reuseShapes(go);
             }
-            
+
             go.caughtByClown(this);
         }
 
-        if (lives.getlives() == 0) {
+        if (lives.getlives() == 0 || isStackFull()) {
             flag = true;
+
         }
-        
-        if(GameObjectContainer.movable.size() < 7){
+
+        int nonShapeCounter = 0;
+        for (var object : GameObjectContainer.movable) {
+            if (!(object instanceof Shape)) {
+                nonShapeCounter++;
+            }
+        }
+        if (nonShapeCounter > GameObjectContainer.movable.size() / 2 || GameObjectContainer.movable.size() < 7) {
             Factory();
         }
-        
-        if(getScore().getScore() > 8){
+
+        if (getScore().getScore() > 8) {
             setStrategy(new Medium());
         }
-        
-        if(getScore().getScore() > 20){
+
+        if (getScore().getScore() > 20) {
             setStrategy(new Hard());
         }
-        
+
         return !flag;
+    }
+
+    private boolean isStackFull() {
+        return GameObjectContainer.rightHand.size() > 18 && GameObjectContainer.leftHand.size() > 18;
     }
 
     public static int getScreenWidth() {
@@ -104,19 +116,7 @@ public class Circus implements World, Observer {
     }
 
     public boolean intersect(GameObject object1, GameObject object2) {
-        double o1CenterX = object1.getX() + object1.getWidth() / 2;
-        double o1CenterY = object1.getY() + object1.getHeight() / 2;
-
-        double o2CenterX = object2.getX() + object2.getWidth() / 2;
-        double o2CenterY = object2.getY() + object2.getHeight() / 2;
-
-        double horizontalDistance = Math.abs(o1CenterX - o2CenterX);
-        double verticalDistance = Math.abs(o1CenterY - o2CenterY);
-
-        double maxHorizontalDistance = object1.getWidth() / 2;
-        double maxVerticalDistance = object1.getHeight() / 2;
-        
-        return horizontalDistance <= maxHorizontalDistance && verticalDistance <= maxVerticalDistance;
+        return RightAndLeftStack.intersect(object1, object2);
     }
 
     void reuseShapes(GameObject p) {
@@ -126,16 +126,15 @@ public class Circus implements World, Observer {
 
     }
 
-    public void intersectedWithMoving(GameObject x) {
-        ListIterator l = new ListIterator(GameObjectContainer.movable);
-        while (l.hasNext()) {
-            GameObject gameObject = l.next();
-            if (x != gameObject && intersect(x, gameObject) && x.getY() == 0 && !(x instanceof Bomb) && !(x instanceof Gift)) {
-                reuseShapes(gameObject);
-            }
-        }
-    }
-
+//    public void intersectedWithMoving(GameObject x) {
+//        ListIterator l = new ListIterator(GameObjectContainer.movable);
+//        while (l.hasNext()) {
+//            GameObject gameObject = l.next();
+//            if (x != gameObject && intersect(x, gameObject) && x.getY() == 0 && !(x instanceof Bomb) && !(x instanceof Gift)) {
+//                reuseShapes(gameObject);
+//            }
+//        }
+//    }
     @Override
     public String getStatus() {
         //notification that something has been changed (will be edited).
@@ -166,9 +165,9 @@ public class Circus implements World, Observer {
     public Lives getLives() {
         return lives;
     }
-    
-    public void setStrategy(Strategy s){
+
+    public void setStrategy(Strategy s) {
         this.strategy = s;
     }
-    
+
 }
