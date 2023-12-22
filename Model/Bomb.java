@@ -47,7 +47,7 @@ public class Bomb extends FallingObject {
         
         
         try {
-            Thread.sleep(1000);
+            Thread.sleep(50);
         } catch (InterruptedException ex) {
         }
 

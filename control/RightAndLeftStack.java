@@ -17,59 +17,59 @@ public class RightAndLeftStack {
 
     private static int vanish;
 
-    public static boolean checkIntersect(GameObject go, GameObject clown) {
-        if (checkIntersect(go, clown, GameObjectContainer.rightHand, RIGHT_HAND)) {
+    public static boolean checkIntersect(GameObject rondom, GameObject clown) {
+        if (checkIntersect(rondom, clown, GameObjectContainer.rightHand, RIGHT_HAND)) {
             return true;
-        } else if (checkIntersect(go, clown, GameObjectContainer.leftHand, LEFT_HAND)) {
+        } else if (checkIntersect(rondom, clown, GameObjectContainer.leftHand, LEFT_HAND)) {
             return true;
         }
         return false;
     }
 
-    private static boolean checkIntersect(GameObject go, GameObject clown, Stack<GameObject> handStack, int handType) {
+    private static boolean checkIntersect(GameObject rondom, GameObject clown, Stack<GameObject> handStack, int handType) {
         int yIntersection = 0; // this initialization won't affect anything
         boolean intersected = false;
 
-        if (handStack.isEmpty() && intersectWithHand(go, Clown.getInstance(), handType)) {
+        if (handStack.isEmpty() && intersectWithHand(rondom, Clown.getInstance(), handType)) {
             yIntersection = clown.getY();
             intersected = true;
 
-        } else if (!handStack.isEmpty() && intersect(go, handStack.peek())) {
+        } else if (!handStack.isEmpty() && intersect(rondom, handStack.peek())) {
             yIntersection = handStack.peek().getY();
             intersected = true;
         }
 
         if (intersected) {
             int start = handType == LEFT_HAND ? 0 : 120;
-
-            Shape caught = (Shape) go;
-            caught.setX(clown.getX() + start);
-            caught.setY(yIntersection - caught.getHeight() / 2);
-            GameObjectContainer.movable.remove(go);
-            GameObjectContainer.controllable.add(go);
-            handStack.push(go);
+            
+            Shape caughted = (Shape) rondom;
+            caughted.setX(clown.getX() + start);
+            caughted.setY(yIntersection - caughted.getHeight() / 2);
+            GameObjectContainer.movable.remove(rondom);
+            GameObjectContainer.controllable.add(rondom);
+            handStack.push(rondom);
         }
 
         return intersected;
     }
 
-    private static boolean intersectWithHand(GameObject o, Clown clown, int handType) {
+    private static boolean intersectWithHand(GameObject object, Clown clown, int handType) {
         boolean intersected;
         if (handType == RIGHT_HAND) {
-            intersected = (Math.abs((clown.getX() + clown.getWidth()) - (o.getX() + o.getWidth())) <= o.getWidth() - MARGIN
-                    && o.getY() == clown.getY() - MARGIN);
+            intersected = (Math.abs((clown.getX() + clown.getWidth()) - (object.getX() + object.getWidth())) <= object.getWidth() - MARGIN
+                    && object.getY() == clown.getY() - MARGIN);
         } else {
-            intersected = (Math.abs(clown.getX() - o.getX()) <= o.getWidth() - MARGIN
-                    && o.getY() == clown.getY() - MARGIN);
+            intersected = (Math.abs(clown.getX() - object.getX()) <= object.getWidth() - MARGIN
+                    && object.getY() == clown.getY() - MARGIN);
         }
         return intersected;
     }
 
-    public static boolean intersect(GameObject o1, GameObject o2) {
-        long intersectedX = Math.abs((o1.getX() + o1.getWidth() / 2) - (o2.getX() + o2.getWidth() / 2));
-        boolean isIntersectedX = intersectedX <= o1.getWidth();
-        long intersectedY = Math.abs((o1.getY() + o1.getHeight() / 2) - (o2.getY() + o2.getHeight() / 2));
-        boolean isIntersectedY = intersectedY <= o1.getHeight();
+    public static boolean intersect(GameObject object1, GameObject object2) {
+        long intersectedX = Math.abs((object1.getX() + object1.getWidth() / 2) - (object2.getX() + object2.getWidth() / 2));
+        boolean isIntersectedX = intersectedX <= object1.getWidth();
+        long intersectedY = Math.abs((object1.getY() + object1.getHeight() / 2) - (object2.getY() + object2.getHeight() / 2));
+        boolean isIntersectedY = intersectedY <= object1.getHeight();
 
         return isIntersectedX && isIntersectedY;
     }
