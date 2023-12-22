@@ -11,7 +11,7 @@ import model.ShapeColor;
 
 public class RightAndLeftStack {
 
-    private static final int MARGIN = 5;
+    private static final int MARGIN = 10;
     private static final int LEFT_HAND = 1;
     private static final int RIGHT_HAND = 2;
 
