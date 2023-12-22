@@ -4,6 +4,7 @@ import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.World;
 import java.util.List;
 import model.*;
+import view.LevelsFrame;
 
 /**
  *
@@ -77,6 +78,7 @@ public class Circus implements World, Observer {
 
         if (lives.getlives() == 0 || isStackFull()) {
             flag = true;
+            LevelsFrame.getController().pause();
         }
 
         int nonShapeCounter = 0;
