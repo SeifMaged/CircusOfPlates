@@ -18,7 +18,7 @@ public class Circus implements World, Observer {
     private final static int SCREENWIDTH = 800;
     private final static int SCREENHEIGHT = 600;
     private Strategy strategy;
-    private final FallingObjectFactory Ourfactory = new FallingObjectFactory();
+    private final Factory factory = new RandomFallingObjectFactory();
     private final Clown clown;
 
     public Circus(Strategy strategy) {
@@ -66,14 +66,14 @@ public class Circus implements World, Observer {
         boolean flag = false;
         while (list.hasNext()) {
 
-            FallingObject go = (FallingObject) list.next();
-            intersectedWithMoving(go);
+            FallingObject f = (FallingObject) list.next();
+            intersectedWithMoving(f);
 
-            if (go.getY() >= getHeight()) {
-                reuseShapes(go);
+            if (f.getY() >= getHeight()) {
+                reuseShapes(f);
             }
 
-            go.caughtByClown(this);
+            f.caughtByClown(this);
         }
 
         if (lives.getlives() == 0 || isStackFull()) {
@@ -161,7 +161,7 @@ public class Circus implements World, Observer {
     ////////// edit the factory 
     public void Factory() {
         for (int i = 0; i < 20; i++) {
-            GameObjectContainer.movable.add(Ourfactory.createFallingObject(getHeight(), getWidth(), strategy.getNumOfColors()));
+            GameObjectContainer.movable.add(factory.createFallingObject(getHeight(), getWidth(), strategy.getNumOfColors()));
         }
     }
 

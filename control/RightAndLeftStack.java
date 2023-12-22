@@ -15,8 +15,6 @@ public class RightAndLeftStack {
     private static final int LEFT_HAND = 1;
     private static final int RIGHT_HAND = 2;
 
-    private static int vanish;
-
     public static boolean checkIntersect(GameObject rondom, GameObject clown) {
         if (checkIntersect(rondom, clown, GameObjectContainer.rightHand, RIGHT_HAND)) {
             return true;
@@ -101,7 +99,6 @@ public class RightAndLeftStack {
 
                     circus.reuseShapes(shape);
                 }
-                vanish++;
                 return true;
             } else {
                 //handStack.addAll(platesToRemove);
@@ -129,7 +126,4 @@ public class RightAndLeftStack {
         }
     }
 
-    public static int getVanish() {
-        return vanish;
-    }
 }

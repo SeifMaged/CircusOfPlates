@@ -2,18 +2,18 @@ package model;
 
 import java.util.Random;
 
-public class FallingObjectFactory {
+public class RandomFallingObjectFactory implements Factory{
 
-    private static final Random random = new Random();
+    private static final Random RANDOM = new Random();
 
     /*
 	 * Randomly Generates FallingObjects
      */
     public FallingObject createFallingObject(int height, int width, int numColor) {
-        int x = random.nextInt(Math.abs(width - 80));
-        int y = random.nextInt(Math.abs(height / 2)) - height / 2;
-        int shapeType = random.nextInt(10);
-        int colorChooser = random.nextInt(numColor);
+        int x = RANDOM.nextInt(Math.abs(width - 80));
+        int y = RANDOM.nextInt(Math.abs(height / 2)) - height / 2;
+        int shapeType = RANDOM.nextInt(10);
+        int colorChooser = RANDOM.nextInt(numColor);
         ShapeColor color;
 
         switch (colorChooser) {
