@@ -10,7 +10,7 @@ import eg.edu.alexu.csd.oop.game.GameObject;
 
 public abstract class ImageObject implements GameObject {
 
-    protected int x;
+    private int x;
     private int y;
     private String imagePath;
     private boolean isVisible;
@@ -23,11 +23,8 @@ public abstract class ImageObject implements GameObject {
         setVisible(true);
 
         this.imagePath = imagePath;
-        try {
-            this.sourceImage = ImageIO.read(new File(imagePath));
-        } catch (IOException e) {
-            this.sourceImage = null;
-        }
+        
+        sourceImage = createImageFromPath(this.imagePath);
         this.image[0] = this.sourceImage;
 
         this.context = new Context(new MovingState(this));
@@ -40,11 +37,7 @@ public abstract class ImageObject implements GameObject {
 
     @Override
     public void setX(int x) {
-        if (x > 0) {
-            this.x = x;
-        } else {
-            this.x = 0;
-        }
+    	this.x = x;
     }
 
     @Override
@@ -90,12 +83,9 @@ public abstract class ImageObject implements GameObject {
     public BufferedImage[] getSpriteImages() {
         return image;
     }
-
-    public String getPath() {
-        if (imagePath != null) {
-            return imagePath;
-        }
-        return "";
+    
+    public void changeSpriteImages(BufferedImage[] newImages) {
+    	image = newImages;
     }
 
     public void handleMoving() {
@@ -112,6 +102,18 @@ public abstract class ImageObject implements GameObject {
 
     public int getNextYPosition() {
         return getY() + 1;
+    }
+    
+    public BufferedImage createImageFromPath(String path) {
+    	
+    	BufferedImage b = null;
+    	try {
+            b = ImageIO.read(new File(path));
+        } catch (IOException e) {
+            b = null;
+        }
+    	return b;
+    	
     }
 
 }

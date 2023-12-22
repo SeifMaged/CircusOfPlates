@@ -84,13 +84,13 @@ public abstract class Shape extends FallingObject {
     @Override
     public void setX(int x) {
         if (leftHand.contains(this)) {
-        	this.x = Clown.getInstance().getX() + Clown.getLeftHandX() ;
+        	super.setX(Clown.getInstance().getX() + Clown.getLeftHandX());
         } else if (rightHand.contains(this)) {
-            this.x = Clown.getInstance().getX() + Clown.getRightHandX() ;
+        	super.setX(Clown.getInstance().getX() + Clown.getRightHandX());
         } else if (x > 0) {
-            this.x = x;
+        	super.setX(x);
         } else {
-            this.x = 0;
+        	super.setX(0);
         }
     }
     
