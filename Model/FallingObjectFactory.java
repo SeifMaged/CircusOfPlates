@@ -5,62 +5,48 @@ import java.util.Random;
 public class FallingObjectFactory {
 
     private static final Random random = new Random();
+
     /*
 	 * Randomly Generates FallingObjects
      */
-    public FallingObject createFallingObject(int height, int width) {
+    public FallingObject createFallingObject(int height, int width, int numColor) {
         int x = random.nextInt(Math.abs(width - 80));
         int y = random.nextInt(Math.abs(height / 2)) - height / 2;
-        int shapeType = random.nextInt(5) + 1;
-        int colorChooser = random.nextInt(5) + 1;
-        ShapeColor color = null;
-        FallingObject fallingObject;
+        int shapeType = random.nextInt(10);
+        int colorChooser = random.nextInt(numColor);
+        ShapeColor color;
 
         switch (colorChooser) {
-            case 1 ->
+            case 0 ->
                 color = ShapeColor.RED;
-            case 2 ->
+            case 1 ->
                 color = ShapeColor.YELLOW;
-            case 3 ->
+            case 2 ->
                 color = ShapeColor.BLUE;
-            case 4 ->
+            case 3 ->
                 color = ShapeColor.BLACK;
-            case 5 ->
+            case 4 ->
                 color = ShapeColor.GREEN;
+            default -> {
+                color = ShapeColor.RED;
+            }
         }
 
         switch (shapeType) {
-
-            case 1 -> {
-                fallingObject = new Plate(x, y, color);
-                break;
+            case 0, 5, 6 -> {
+                return new Plate(x, y, color);
             }
-
-            case 2 -> {
-                fallingObject = new Bomb(x, y);
-                break;
+            case 1, 4, 9 -> {
+                return new Candy(x, y, color);
             }
-            case 3 -> {
-                fallingObject = new Gift(x, y);
-                break;
+            case 2, 8 -> {
+                return new Bomb(x, y);
             }
-
-            case 4 -> {
-                fallingObject = new Plate(x, y, color);
-                break;
+            case 3, 7 -> {
+                return new Gift(x, y);
             }
-
-            case 5 -> {
-                fallingObject = new Plate(x, y, color);
-                break;
-            }
-            default -> {
-                fallingObject = new Plate(x, y, color);
-            }
-
         }
-
-        return fallingObject;
+        return new Plate(x, y, color);
     }
 
 }

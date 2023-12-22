@@ -4,7 +4,6 @@ import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.World;
 import java.util.List;
 import model.*;
-import view.LevelsFrame;
 
 /**
  *
@@ -125,15 +124,19 @@ public class Circus implements World, Observer {
     @Override
     public String getStatus() {
         //notification that something has been changed (will be edited).
-        String right = "    right " + GameObjectContainer.rightHand.size();
-        if (!GameObjectContainer.rightHand.empty()) {
-            right += " " + ((Shape) GameObjectContainer.rightHand.peek()).getColor();
-        }
-        String left = "   left " + GameObjectContainer.leftHand.size();
-        if (!GameObjectContainer.leftHand.empty()) {
-            left += " " + ((Shape) GameObjectContainer.leftHand.peek()).getColor();
-        }
-        return "Score: " + score.getScore() + "  |   Lives: " + lives.getlives() + left + right;
+//        String right = "    right " + GameObjectContainer.rightHand.size();
+//        if (!GameObjectContainer.rightHand.empty()) {
+//            right += " " + ((Shape) GameObjectContainer.rightHand.peek()).getColor();
+//        }
+//        String left = "   left " + GameObjectContainer.leftHand.size();
+//        if (!GameObjectContainer.leftHand.empty()) {
+//            left += " " + ((Shape) GameObjectContainer.leftHand.peek()).getColor();
+//        }
+
+//        String control = "   control " + getControlSpeed();
+//        String speed = "   speed " + getSpeed();
+        
+        return "Score: " + score.getScore() + "  |   Lives: " + lives.getlives();
     }
 
     @Override
@@ -149,7 +152,7 @@ public class Circus implements World, Observer {
     ////////// edit the factory 
     private void Factory() {
         for (int i = 0; i < 20; i++) {
-            GameObjectContainer.movable.add(Ourfactory.createFallingObject(getHeight(), getWidth()));
+            GameObjectContainer.movable.add(Ourfactory.createFallingObject(getHeight(), getWidth(), strategy.getNumOfColors()));
         }
     }
 

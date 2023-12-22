@@ -2,16 +2,14 @@ package model;
 
 import control.Circus;
 import control.GameObjectContainer;
-import eg.edu.alexu.csd.oop.game.GameObject;
-import java.util.Stack;
 import view.LevelsFrame;
 
 public class Bomb extends FallingObject {
 
     private static final String IMAGE_PATH = "src/resources/bomb.png";
     private static final String IMAGE_PATH2 = "src/resources/bomb2.png";
-    
-    private BackGround bomb = new BackGround(IMAGE_PATH2);
+
+    private final ImageObject bomb = new BackGround(IMAGE_PATH2);
 
     public Bomb(int x, int y) {
         super(IMAGE_PATH);
@@ -42,20 +40,10 @@ public class Bomb extends FallingObject {
 
     private void freeze() {
         LevelsFrame.getController().pause();
-        //bomb.setVisible(true);
-
-        
-        
         try {
-            Thread.sleep(50);
+            Thread.sleep(1000);
         } catch (InterruptedException ex) {
         }
-
-        //bomb.setVisible(false);
-
-        
-        
         LevelsFrame.getController().resume();
     }
-
 }

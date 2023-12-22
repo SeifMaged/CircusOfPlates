@@ -20,4 +20,9 @@ public class Easy implements Strategy{
         return 10;
     }
 
+    @Override
+    public int getNumOfColors() {
+        return 3;
+    }
+
 }

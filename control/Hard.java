@@ -7,7 +7,7 @@ public class Hard implements Strategy{
 
     @Override
     public int getObjectSpeed() {
-        return 1;
+        return 5;
     }
 
     @Override
@@ -18,6 +18,11 @@ public class Hard implements Strategy{
     @Override
     public int getLives() {
         return 3;
+    }
+
+    @Override
+    public int getNumOfColors() {
+        return 5;
     }
 
 }

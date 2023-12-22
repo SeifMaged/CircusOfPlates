@@ -20,4 +20,9 @@ public class Medium implements Strategy{
         return 5;
     }
 
+    @Override
+    public int getNumOfColors() {
+        return 4;
+    }
+
 }
