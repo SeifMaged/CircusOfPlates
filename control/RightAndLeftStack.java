@@ -11,7 +11,7 @@ import model.ShapeColor;
 
 public class RightAndLeftStack {
 
-    private static final int MARGIN = 10;
+    private static final int MARGIN = 5;
     private static final int LEFT_HAND = 1;
     private static final int RIGHT_HAND = 2;
 
@@ -32,6 +32,7 @@ public class RightAndLeftStack {
 
         if (handStack.isEmpty() && intersectWithHand(rondom, Clown.getInstance(), handType)) {
             yIntersection = clown.getY();
+            yIntersection = yIntersection + (handType == LEFT_HAND ? 40 : 62);
             intersected = true;
 
         } else if (!handStack.isEmpty() && intersect(rondom, handStack.peek())) {
@@ -40,7 +41,7 @@ public class RightAndLeftStack {
         }
 
         if (intersected) {
-            int start = handType == LEFT_HAND ? 0 : 120;
+            int start = handType == LEFT_HAND ? Clown.getLeftHandX() : Clown.getRightHandX();
             
             Shape caughted = (Shape) rondom;
             caughted.setX(clown.getX() + start);

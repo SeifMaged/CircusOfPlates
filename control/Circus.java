@@ -10,7 +10,7 @@ import model.*;
  * @author Adham
  */
 public class Circus implements World, Observer {
-
+    
     private final String backgroundFile = "src/resources/background.png";
     private final Score score;
     private final Lives lives;
@@ -30,7 +30,7 @@ public class Circus implements World, Observer {
         GameObjectContainer.controllable.add(clown);
         this.score.subscribe(this);
         this.lives.subscribe(this);
-        
+
         GameObjectContainer.constant.add(new BackGround(backgroundFile));
     }
 
@@ -90,6 +90,13 @@ public class Circus implements World, Observer {
             Factory();
         }
         
+        if(strategy instanceof DefaultEasyStrategy defaultStrategy){
+            defaultStrategy.increaseDifficulty(this);
+        }
+        if(strategy instanceof DefaultMediumStrategy defaultStrategy){
+            defaultStrategy.increaseDifficulty(this);
+        }
+
         return !flag;
     }
 
@@ -137,7 +144,7 @@ public class Circus implements World, Observer {
 
 //        String control = "   control " + getControlSpeed();
 //        String speed = "   speed " + getSpeed();
-        
+//            String str = "      Strategy " + strategy;
         return "Score: " + score.getScore() + "  |   Lives: " + lives.getlives();
     }
 
@@ -152,7 +159,7 @@ public class Circus implements World, Observer {
     }
 
     ////////// edit the factory 
-    private void Factory() {
+    public void Factory() {
         for (int i = 0; i < 20; i++) {
             GameObjectContainer.movable.add(Ourfactory.createFallingObject(getHeight(), getWidth(), strategy.getNumOfColors()));
         }

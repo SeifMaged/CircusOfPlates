@@ -25,6 +25,7 @@ public class LevelsFrame extends JFrame{
     private JButton easyButton;
     private JButton mediumButton;
     private JButton hardButton;
+    private JButton classicButton;
     
 
     private JMenuBar menubar;
@@ -35,7 +36,7 @@ public class LevelsFrame extends JFrame{
     private final String backgroundFile = "src/resources/levels.png";
     private final String sound = "src/resources/circus.wav";
     private final int buttonWidth = 200;
-    private final int buttonHeight = 50;
+    private final int buttonHeight = 40;
     
     public LevelsFrame() {
         initalizeComponents();
@@ -43,7 +44,7 @@ public class LevelsFrame extends JFrame{
         this.setTitle("Circus Of Plates");
         this.setResizable(false);
         this.setPreferredSize(new Dimension(800, 600));
-        this.setLayout(new FlowLayout(FlowLayout.CENTER, 80, 230));
+        this.setLayout(new FlowLayout(FlowLayout.CENTER, 80, 220));
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -55,12 +56,14 @@ public class LevelsFrame extends JFrame{
         
         panel = new JPanel();
         GridLayout layout = new GridLayout();
-        layout.setRows(3);
+        layout.setRows(4);
         layout.setColumns(1);
         layout.setVgap(20);
         panel.setOpaque(false);
         panel.setLayout(layout);
         
+        classicButton = new JButton("Classic");
+        classicButton.setFocusable(false);
         easyButton = new JButton("Easy");
         easyButton.setFocusable(false);
         mediumButton = new JButton("Medium");
@@ -92,6 +95,7 @@ public class LevelsFrame extends JFrame{
         menu.add(resumeItem);
 
         setBackground();
+        setDefaultButton();
         setEasyButton();
         setMediumButton();
         setHardButton();
@@ -125,6 +129,17 @@ public class LevelsFrame extends JFrame{
             }
         });
     }
+    
+    private void setDefaultButton() {
+        setButton(classicButton);
+
+        classicButton.addActionListener((ActionEvent e) -> {
+            this.setVisible(false);
+            Circus game = new Circus(new DefaultEasyStrategy());
+            controller = GameEngine.start("Circus Of Plates", game, menubar);
+            playSound(sound);
+        });
+    }
 
     private void setEasyButton() {
         setButton(easyButton);
@@ -135,8 +150,6 @@ public class LevelsFrame extends JFrame{
             controller = GameEngine.start("Circus Of Plates", game, menubar);
             playSound(sound);
         });
-        
-//        this.add(easyButton);
     }
 
     private void setMediumButton() {
@@ -148,8 +161,6 @@ public class LevelsFrame extends JFrame{
             controller = GameEngine.start("Circus Of Plates", game, menubar);
             playSound(sound);
         });
-        
-//        this.add(mediumButton);
     }
     
     private void setHardButton() {
@@ -161,8 +172,6 @@ public class LevelsFrame extends JFrame{
             controller = GameEngine.start("Circus Of Plates", game, menubar);
             playSound(sound);
         });
-        
-//        this.add(hardButton);
     }
     
     
