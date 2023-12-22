@@ -9,14 +9,10 @@ public class Bomb extends FallingObject {
     private static final String IMAGE_PATH = "src/resources/bomb.png";
     private static final String IMAGE_PATH2 = "src/resources/bomb2.png";
 
-    private final ImageObject bomb = new BackGround(IMAGE_PATH2);
-
     public Bomb(int x, int y) {
         super(IMAGE_PATH);
         setX(x);
         setY(y);
-        GameObjectContainer.constant.add(bomb);
-        bomb.setVisible(false);
     }
 
     @Override

@@ -4,9 +4,14 @@ import control.*;
 import eg.edu.alexu.csd.oop.game.GameEngine;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.IOException;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
-import javax.sound.sampled.*;
-import java.io.*;
 
 /**
  * @author Ahmed Mahmoud
@@ -94,7 +99,7 @@ public class LevelsFrame extends JFrame{
     }
 
     public void playSound(String soundFilePath) {
-        /*
+        
     	try {
             File soundFile = new File(soundFilePath);
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
@@ -108,7 +113,7 @@ public class LevelsFrame extends JFrame{
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             System.out.println("Error loading sound");
         }
-        */
+        
     }
 
     private void setBackground() {

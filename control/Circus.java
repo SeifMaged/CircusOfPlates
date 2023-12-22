@@ -15,8 +15,8 @@ public class Circus implements World, Observer {
     private final Score score;
     private final Lives lives;
 
-    private final static int screenWidth = 800;
-    private final static int screenHeight = 600;
+    private final static int SCREENWIDTH = 800;
+    private final static int SCREENHEIGHT = 600;
     private Strategy strategy;
     private final FallingObjectFactory Ourfactory = new FallingObjectFactory();
     private final Clown clown;
@@ -30,6 +30,7 @@ public class Circus implements World, Observer {
         GameObjectContainer.controllable.add(clown);
         this.score.subscribe(this);
         this.lives.subscribe(this);
+        
         GameObjectContainer.constant.add(new BackGround(backgroundFile));
     }
 
@@ -50,12 +51,12 @@ public class Circus implements World, Observer {
 
     @Override
     public int getWidth() {
-        return screenWidth;
+        return SCREENWIDTH;
     }
 
     @Override
     public int getHeight() {
-        return screenHeight;
+        return SCREENHEIGHT;
     }
 
 // will be implmented.
@@ -88,6 +89,7 @@ public class Circus implements World, Observer {
         if (nonShapeCounter > GameObjectContainer.movable.size() / 2 || GameObjectContainer.movable.size() < 7) {
             Factory();
         }
+        
         return !flag;
     }
 
@@ -96,11 +98,11 @@ public class Circus implements World, Observer {
     }
 
     public static int getScreenWidth() {
-        return screenWidth;
+        return SCREENHEIGHT;
     }
 
     public static int getScreenHeight() {
-        return screenHeight;
+        return SCREENHEIGHT;
     }
 
     public boolean intersect(GameObject object1, GameObject object2) {
