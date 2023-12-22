@@ -20,14 +20,16 @@ public abstract class ImageObject implements GameObject {
     protected BufferedImage[] image = new BufferedImage[1];
 
     public ImageObject(String imagePath) {
-        this.imagePath = imagePath;
         setVisible(true);
+
+        this.imagePath = imagePath;
         try {
-            sourceImage = ImageIO.read(new File(this.imagePath));
+            this.sourceImage = ImageIO.read(new File(imagePath));
         } catch (IOException e) {
-            sourceImage = null;
+            this.sourceImage = null;
         }
-        image[0] = sourceImage;
+        this.image[0] = this.sourceImage;
+
         this.context = new Context(new MovingState(this));
     }
 
@@ -52,10 +54,11 @@ public abstract class ImageObject implements GameObject {
 
     @Override
     public void setY(int y) {
-        if(this.horizontalOnly==false)
+        if (this.horizontalOnly == false) {
             this.y = y;
-        else if(this.horizontalOnly==true&&y==0)
-            this.y=0;
+        } else if (this.horizontalOnly == true && y == 0) {
+            this.y = 0;
+        }
     }
 
     @Override

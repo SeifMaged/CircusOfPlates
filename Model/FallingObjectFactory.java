@@ -12,7 +12,7 @@ public class FallingObjectFactory {
         int x = random.nextInt(Math.abs(width - 20));
         int y = random.nextInt(Math.abs(height / 2)) - height / 2;
         int shapeType = random.nextInt(5) + 1;
-        int colorChooser = random.nextInt(3) + 1;
+        int colorChooser = random.nextInt(5) + 1;
         ShapeColor color = null;
         FallingObject fallingObject;
 
@@ -23,12 +23,16 @@ public class FallingObjectFactory {
                 color = ShapeColor.YELLOW;
             case 3 ->
                 color = ShapeColor.BLUE;
+            case 4 ->
+                color = ShapeColor.BLACK;
+            case 5 ->
+                color = ShapeColor.GREEN;
         }
 
         switch (shapeType) {
 
             case 1 -> {
-                fallingObject = new Candy(x, y, color);
+                fallingObject = new Plate(x, y, color);
                 break;
             }
 
@@ -47,7 +51,7 @@ public class FallingObjectFactory {
             }
 
             case 5 -> {
-                fallingObject = new Candy(x, y, color);
+                fallingObject = new Plate(x, y, color);
                 break;
             }
             default -> {

@@ -13,7 +13,7 @@ import java.io.*;
  */
 public class LevelsFrame extends JFrame{
 
-    private GameEngine.GameController controller;
+    private static GameEngine.GameController controller;
 
     private JPanel panel;
     private Image background;
@@ -165,5 +165,9 @@ public class LevelsFrame extends JFrame{
         button.setBackground(new Color(12, 55, 36));
         button.setForeground(new Color(188, 230, 211));
         panel.add(button);
+    }
+
+    public static GameEngine.GameController getController() {
+        return controller;
     }
 }
