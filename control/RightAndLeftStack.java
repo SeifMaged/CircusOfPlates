@@ -40,7 +40,7 @@ public class RightAndLeftStack {
         }
 
         if (intersected) {
-            int start = handType == LEFT_HAND ? 0 : 130;
+            int start = handType == LEFT_HAND ? 0 : 120;
 
             Shape caught = (Shape) go;
             caught.setX(clown.getX() + start);
@@ -103,7 +103,13 @@ public class RightAndLeftStack {
                 vanish++;
                 return true;
             } else {
-                handStack.addAll(platesToRemove);
+                //handStack.addAll(platesToRemove);
+            	
+            	//returns the items removed from the stack back to the stack in the correct order
+            	handStack.add(platesToRemove.get(2));
+            	handStack.add(platesToRemove.get(1));
+            	handStack.add(platesToRemove.get(0));
+            	
                 return false;
             }
         }
