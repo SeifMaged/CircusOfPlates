@@ -28,8 +28,6 @@ public class Circus implements World, Observer {
 
         clown = Clown.getInstance();
         GameObjectContainer.controllable.add(clown);
-
-        Factory();
         this.score.subscribe(this);
         this.lives.subscribe(this);
         GameObjectContainer.constant.add(new BackGround(backgroundFile));
@@ -68,9 +66,9 @@ public class Circus implements World, Observer {
         while (list.hasNext()) {
 
             FallingObject go = (FallingObject) list.next();
-            //RightAndLeftStack.checkIntersect(go, clown);
+            intersectedWithMoving(go);
 
-            if (go.getY() == getHeight()) {
+            if (go.getY() >= getHeight()) {
                 reuseShapes(go);
             }
 
@@ -79,7 +77,6 @@ public class Circus implements World, Observer {
 
         if (lives.getlives() == 0 || isStackFull()) {
             flag = true;
-
         }
 
         int nonShapeCounter = 0;
@@ -91,20 +88,11 @@ public class Circus implements World, Observer {
         if (nonShapeCounter > GameObjectContainer.movable.size() / 2 || GameObjectContainer.movable.size() < 7) {
             Factory();
         }
-
-        if (getScore().getScore() > 8) {
-            setStrategy(new Medium());
-        }
-
-        if (getScore().getScore() > 20) {
-            setStrategy(new Hard());
-        }
-
         return !flag;
     }
 
     private boolean isStackFull() {
-        return GameObjectContainer.rightHand.size() > 18 && GameObjectContainer.leftHand.size() > 18;
+        return GameObjectContainer.rightHand.size() > 12 && GameObjectContainer.leftHand.size() > 12;
     }
 
     public static int getScreenWidth() {
@@ -120,25 +108,31 @@ public class Circus implements World, Observer {
     }
 
     void reuseShapes(GameObject p) {
-
         p.setY(-1 * (int) (Math.random() * getHeight()));
         p.setX((int) (Math.random() * getWidth()));
 
     }
 
-//    public void intersectedWithMoving(GameObject x) {
-//        ListIterator l = new ListIterator(GameObjectContainer.movable);
-//        while (l.hasNext()) {
-//            GameObject gameObject = l.next();
-//            if (x != gameObject && intersect(x, gameObject) && x.getY() == 0 && !(x instanceof Bomb) && !(x instanceof Gift)) {
-//                reuseShapes(gameObject);
-//            }
-//        }
-//    }
+    public void intersectedWithMoving(GameObject shape) {
+        for (var obj : GameObjectContainer.movable) {
+            if (shape != obj && intersect(shape, obj) && shape.getY() == 0 && (shape instanceof Shape)) {
+                reuseShapes(obj);
+            }
+        }
+    }
+
     @Override
     public String getStatus() {
         //notification that something has been changed (will be edited).
-        return "Score: " + score.getScore() + "  |   Lives: " + lives.getlives();
+        String right = "    right " + GameObjectContainer.rightHand.size();
+        if (!GameObjectContainer.rightHand.empty()) {
+            right += " " + ((Shape) GameObjectContainer.rightHand.peek()).getColor();
+        }
+        String left = "   left " + GameObjectContainer.leftHand.size();
+        if (!GameObjectContainer.leftHand.empty()) {
+            left += " " + ((Shape) GameObjectContainer.leftHand.peek()).getColor();
+        }
+        return "Score: " + score.getScore() + "  |   Lives: " + lives.getlives() + left + right;
     }
 
     @Override

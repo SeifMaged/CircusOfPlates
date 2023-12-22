@@ -17,7 +17,7 @@ public class RightAndLeftStack {
 
     private static int vanish;
 
-    public static boolean checkIntersect(GameObject go, Clown clown) {
+    public static boolean checkIntersect(GameObject go, GameObject clown) {
         if (checkIntersect(go, clown, GameObjectContainer.rightHand, RIGHT_HAND)) {
             return true;
         } else if (checkIntersect(go, clown, GameObjectContainer.leftHand, LEFT_HAND)) {
@@ -26,35 +26,26 @@ public class RightAndLeftStack {
         return false;
     }
 
-    private static boolean checkIntersect(GameObject go, Clown clown, Stack<GameObject> handStack, int handType) {
+    private static boolean checkIntersect(GameObject go, GameObject clown, Stack<GameObject> handStack, int handType) {
         int yIntersection = 0; // this initialization won't affect anything
         boolean intersected = false;
 
-        if (handStack.isEmpty() && intersectWithHand(go, clown, handType)) {
-//            if (handType == RIGHT_HAND) {
-//                yIntersection = clown.getY() + 62;
-//            } else {
-//                yIntersection = clown.getY() + 42;
-//            }
-            yIntersection = clown.getY() - 10;
+        if (handStack.isEmpty() && intersectWithHand(go, Clown.getInstance(), handType)) {
+            yIntersection = clown.getY();
             intersected = true;
 
         } else if (!handStack.isEmpty() && intersect(go, handStack.peek())) {
-            yIntersection = handStack.peek().getY() - 10;
+            yIntersection = handStack.peek().getY();
             intersected = true;
         }
 
         if (intersected) {
-            int start;
-            if (handType == 1) {
-                start = 0;
-            } else {
-                start = 130;
-            }
-            Shape pCaught = (Shape) go;
+            int start = handType == LEFT_HAND ? 0 : 130;
+
+            Shape caught = (Shape) go;
+            caught.setX(clown.getX() + start);
+            caught.setY(yIntersection - caught.getHeight() / 2);
             GameObjectContainer.movable.remove(go);
-            pCaught.setX(clown.getX() + start);
-            pCaught.setY(yIntersection - pCaught.getHeight() / 2);
             GameObjectContainer.controllable.add(go);
             handStack.push(go);
         }
@@ -62,18 +53,16 @@ public class RightAndLeftStack {
         return intersected;
     }
 
-    private static boolean intersectWithHand(GameObject o, GameObject clown, int handType) {
-        clown = GameObjectContainer.controllable.get(0);
-
+    private static boolean intersectWithHand(GameObject o, Clown clown, int handType) {
+        boolean intersected;
         if (handType == RIGHT_HAND) {
-
-            return (Math.abs((clown.getX() + clown.getWidth()) - (o.getX() + o.getWidth())) <= o.getWidth() - MARGIN
+            intersected = (Math.abs((clown.getX() + clown.getWidth()) - (o.getX() + o.getWidth())) <= o.getWidth() - MARGIN
                     && o.getY() == clown.getY() - MARGIN);
         } else {
-
-            return (Math.abs(clown.getX() - o.getX()) <= o.getWidth() - MARGIN
+            intersected = (Math.abs(clown.getX() - o.getX()) <= o.getWidth() - MARGIN
                     && o.getY() == clown.getY() - MARGIN);
         }
+        return intersected;
     }
 
     public static boolean intersect(GameObject o1, GameObject o2) {
@@ -121,10 +110,6 @@ public class RightAndLeftStack {
         return false;
     }
 
-//    private static boolean vanishHand(){
-//        
-//    }
-    
     public static void VanishLeftHand(Circus circus, Score score) {
         if (vanishHand(GameObjectContainer.leftHand, circus)) {
             score.increaseScore(1);

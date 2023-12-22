@@ -5,7 +5,9 @@ import java.awt.Color;
 public enum ShapeColor {
     RED(Color.RED),
     YELLOW(Color.YELLOW),
-    BLUE(Color.BLUE);
+    BLUE(Color.BLUE),
+    GREEN(Color.GREEN),
+    BLACK(Color.BLACK);
 
     private final Color color;
 

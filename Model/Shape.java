@@ -78,7 +78,6 @@ public abstract class Shape extends FallingObject {
         }
         RightAndLeftStack.VanishLeftHand(game, game.getScore());
         RightAndLeftStack.VanishRightHand(game, game.getScore());
-
     }
 
     @Override
