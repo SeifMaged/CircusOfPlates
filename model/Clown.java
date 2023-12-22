@@ -32,13 +32,14 @@ public class Clown extends ImageObject {
         return clownInstance;
     }
     
-    
+    /*
     @Override
     public void setX(int x) {
     	// Limits the clown's horizontal Movement
         if (x > 10 && x < Circus.getScreenWidth() - (int)(0.2 * Circus.getScreenWidth()) - 50)
             super.setX(x);
     }
+    */
     
 
 }

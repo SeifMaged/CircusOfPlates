@@ -80,17 +80,18 @@ public abstract class Shape extends FallingObject {
         RightAndLeftStack.VanishRightHand(game, game.getScore());
     }
 
+    
     @Override
     public void setX(int x) {
         if (x > 600 && leftHand.contains(this)) {
             this.x = 600;
-        } else if (x < 125 && rightHand.contains(this)) {
-            this.x = 125;
+        } else if (x < 120 && rightHand.contains(this)) {
+            this.x = 120;
         } else if (x > 0) {
             this.x = x;
         } else {
             this.x = 0;
         }
     }
-
+    
 }

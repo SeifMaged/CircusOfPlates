@@ -78,7 +78,6 @@ public class Circus implements World, Observer {
 
         if (lives.getlives() == 0 || isStackFull()) {
             flag = true;
-            LevelsFrame.getController().pause();
         }
 
         int nonShapeCounter = 0;
@@ -94,7 +93,7 @@ public class Circus implements World, Observer {
     }
 
     private boolean isStackFull() {
-        return GameObjectContainer.rightHand.size() > 12 && GameObjectContainer.leftHand.size() > 12;
+        return GameObjectContainer.rightHand.size() > 18 && GameObjectContainer.leftHand.size() > 18;
     }
 
     public static int getScreenWidth() {
