@@ -14,7 +14,7 @@ public abstract class ImageObject implements GameObject {
     private int y;
     private String imagePath;
     private boolean isVisible;
-    private final Context context;
+    protected final Context context;
     protected boolean horizontalOnly;
     protected BufferedImage sourceImage;
     protected BufferedImage[] image = new BufferedImage[1];
@@ -95,7 +95,7 @@ public abstract class ImageObject implements GameObject {
     public void changeToControlState() {
         this.context.setState(new ControlState(this));
     }
-
+///////////////////////////////////////////////////////
     public int getNextXPosition() {
         return getX();
     }
@@ -115,5 +115,6 @@ public abstract class ImageObject implements GameObject {
     	return b;
     	
     }
+
 
 }

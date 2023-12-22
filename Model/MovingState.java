@@ -22,5 +22,10 @@ public class MovingState implements State{
         this.obj.setY(y);
     }
 
+    @Override
+    public boolean isControlState() {
+        return false;
+    }
+
 
 }

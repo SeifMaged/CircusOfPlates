@@ -75,6 +75,7 @@ public abstract class Shape extends FallingObject {
         this.handleMoving();
         if (RightAndLeftStack.checkIntersect(this, Clown.getInstance())) {
             this.horizontalOnly = true;
+            this.changeToControlState();
         }
         RightAndLeftStack.VanishLeftHand(game, game.getScore());
         RightAndLeftStack.VanishRightHand(game, game.getScore());
@@ -83,15 +84,22 @@ public abstract class Shape extends FallingObject {
     
     @Override
     public void setX(int x) {
-        if (leftHand.contains(this)) {
-        	super.setX(Clown.getInstance().getX() + Clown.getLeftHandX());
-        } else if (rightHand.contains(this)) {
-        	super.setX(Clown.getInstance().getX() + Clown.getRightHandX());
-        } else if (x > 0) {
-        	super.setX(x);
-        } else {
-        	super.setX(0);
+        if(checkControlState()){
+            if (leftHand.contains(this)) {
+                    super.setX(Clown.getInstance().getX() + Clown.getLeftHandX());
+            } else if (rightHand.contains(this)) {
+                    super.setX(Clown.getInstance().getX() + Clown.getRightHandX());
+            }
+        }else{
+            if (x > 0) {
+                   super.setX(x);
+           } else {
+                   super.setX(0);
+           }
         }
+    }
+    private boolean checkControlState(){
+        return this.context.isAtControlState();
     }
     
 }

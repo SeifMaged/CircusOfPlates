@@ -17,4 +17,7 @@ public class Context { //delegation class for state
     public void request(int x,int y) {
         state.handleState(x,y);
     }
+    public boolean isAtControlState() {
+        return state.isControlState();
+    }
 }

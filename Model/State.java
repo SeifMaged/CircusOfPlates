@@ -7,5 +7,5 @@ package model;
 public interface State {
     
     void handleState(int x,int y);
-
+    boolean isControlState();
 }

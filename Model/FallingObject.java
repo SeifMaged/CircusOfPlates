@@ -10,4 +10,5 @@ public abstract class FallingObject extends ImageObject{
 	}
 
         public abstract void caughtByClown(Circus game);
+
 }

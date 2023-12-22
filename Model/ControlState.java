@@ -17,8 +17,13 @@ public class ControlState implements State{
         this.obj = obj;
     }
     @Override
-    public void handleState(int x,int y) {
-        this.obj.setX(x);
-        this.obj.setY(y);
+    public boolean isControlState() {
+        return true;
     }
+
+    @Override
+    public void handleState(int x, int y) {
+        
+    }
+    
 }
