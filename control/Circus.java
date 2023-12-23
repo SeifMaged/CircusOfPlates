@@ -116,7 +116,7 @@ public class Circus implements World, Observer {
         return RightAndLeftStack.intersect(object1, object2);
     }
 
-    void reuseShapes(GameObject p) {
+    public void reuseShapes(GameObject p) {
         p.setY(-1 * (int) (Math.random() * getHeight()));
         p.setX((int) (Math.random() * getWidth()));
 
