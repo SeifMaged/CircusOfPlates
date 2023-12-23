@@ -89,19 +89,11 @@ public abstract class ImageObject implements GameObject {
     }
 
     public void handleMoving() {
-        this.context.request(getNextXPosition(), getNextYPosition());
+        this.context.request(getX(), getY() + 1);
     }
 
     public void changeToControlState() {
         this.context.setState(new ControlState(this));
-    }
-///////////////////////////////////////////////////////
-    public int getNextXPosition() {
-        return getX();
-    }
-
-    public int getNextYPosition() {
-        return getY() + 1;
     }
     
     public BufferedImage createImageFromPath(String path) {
