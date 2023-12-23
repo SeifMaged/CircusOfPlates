@@ -80,13 +80,13 @@ public class Circus implements World, Observer {
             flag = true;
         }
 
-        int nonShapeCounter = 0;
+        int bombCounter = 0;
         for (var object : GameObjectContainer.movable) {
-            if (!(object instanceof Shape)) {
-                nonShapeCounter++;
+            if (object instanceof Bomb) {
+            	bombCounter++;
             }
         }
-        if (nonShapeCounter > GameObjectContainer.movable.size() / 2 || GameObjectContainer.movable.size() < 7) {
+        if (bombCounter > GameObjectContainer.movable.size() / 2 || GameObjectContainer.movable.size() < 7) {
             Factory();
         }
         

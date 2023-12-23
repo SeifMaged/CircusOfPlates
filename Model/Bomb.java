@@ -31,7 +31,7 @@ public class Bomb extends FallingObject {
     private void freeze() {
         LevelsFrame.getController().pause();
         try {
-            Thread.sleep(200);
+            Thread.sleep(75);
         } catch (InterruptedException ex) {
         }
         GameObjectContainer.movable.remove(this);
